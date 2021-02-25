@@ -1,7 +1,5 @@
 <h1 align="center">Python Discord API</h1>
 
-----
-
 <p align="center">
 <a href="https://pythondiscord.com"><img alt="Python Discord Website" src="https://raw.githubusercontent.com/python-discord/branding/master/logos/badge/badge_github.svg"></a>
 </p>
@@ -10,7 +8,6 @@ The Python Discord API is an internal API that serves as an abstraction layer be
 
 As it is tightly coupled with the functionality of our bot, the API is currently not strictly versioned and may change at any time depending on the features required for our Discord bot.
 
----
 ## Contributing to the API project
 
 Contributions are welcome.
