@@ -1,3 +1,11 @@
+---
+name: Endpoint/Route
+about: Issues related to endpoints/routes
+title: ''
+labels: 'area: endpoint'
+assignees: ''
+
+---
 
 # Description
 
