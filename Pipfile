@@ -24,6 +24,7 @@ flake8-todo = "*"
 pep8-naming = "*"
 pre-commit = "*"
 pytest = "*"
+uvicorn = {version = "~=0.13.4", extras = ["standard"]}
 
 [requires]
 python_version = "3.9"
