@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["--reload"]
+    ports:
+      - "127.0.0.1:8000:8000"
+    tty: true
+    volumes:
+      - .:/app:ro
+    environment:
+      auth_token: "my_token"
+      debug: 1
