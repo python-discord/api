@@ -14,7 +14,8 @@ from api.core.middleware import TokenAuthentication
 from api.core.middleware.token_authentication import (
     INVALID_CREDENTIALS,
     NO_AUTHORIZATION_HEADER,
-    NO_AUTH_DEBUG_ENDPOINTS, on_auth_error,
+    NO_AUTH_DEBUG_ENDPOINTS,
+    on_auth_error,
 )
 
 
@@ -112,7 +113,7 @@ async def test_debug_unauthenticated_access(
     assert user.username == "api_client"
 
 
-def test_on_auth_error_serialized_exception_message():
+def test_on_auth_error_serialized_exception_message() -> None:
     """Test the serialization of an auth error as JSON."""
     error_message = "Error message"
     request = create_request("/", None)

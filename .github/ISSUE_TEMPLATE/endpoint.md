@@ -25,7 +25,7 @@ New endpoint to register lemoji emojis in the database.
     "enabled": true
 }
  ```
- 
+
 #### Response format
 ```json
 {
@@ -35,7 +35,7 @@ New endpoint to register lemoji emojis in the database.
     "enabled": true
 }
  ```
- 
+
 #### Status codes
 - 201: returned on success
 - 400: if a given user is unknown or a field in the request body is invalid
@@ -70,7 +70,7 @@ Invalid query parameters will be ignored.
     }
 ]
  ```
- 
+
 #### Status codes
 - 200: returned on success
 </details>

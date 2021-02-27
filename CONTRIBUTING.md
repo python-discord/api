@@ -1,5 +1,5 @@
 # Contributing Guidelines
-Contributions to this project are welcome. Do note that this service is essential to our internal infrastructure, which means that the quality requirements are high. 
+Contributions to this project are welcome. Do note that this service is essential to our internal infrastructure, which means that the quality requirements are high.
 
 ## Reporting bugs
 If you've found a bug in this project, please open an issue on GitHub. Describe the bug, the steps required to reproduce the bug, and, if possible, a few lines of code to demonstrate the bug. This makes it easy for us review your bug report.
@@ -10,7 +10,7 @@ If you'd like to propose a new feature or a change to an existing feature, pleas
 If your proposed change affects API-endpoints, please include your initial design for the new contract of the API-endpoint. To make this a bit easier, we've created an issue template with an example of such a contract. If you're only changing a small part of an endpoint, it's fine to only include the relevant changes. This makes it easier for us to estimate the impact your change will have on other services: Do we need to make a lot of changes to other services to account for this change?
 
 ## Submitting Code
-You can submit changes to the project using a Pull Request on GitHub. Please make sure to include all relevant information in your Pull Request description, including the reason for making the change and the GitHub Issue linked to this Pull Request. Pull Requests that change existing endpoints or introduce new endpoints should also include a clear overview of the endpoints involved, as we need to make sure that other services in our infrastructure are prepared for the changes. 
+You can submit changes to the project using a Pull Request on GitHub. Please make sure to include all relevant information in your Pull Request description, including the reason for making the change and the GitHub Issue linked to this Pull Request. Pull Requests that change existing endpoints or introduce new endpoints should also include a clear overview of the endpoints involved, as we need to make sure that other services in our infrastructure are prepared for the changes.
 
 ### Commit History
 We value a clear and documenting commit history. This means that each commit should contain a single, atomic change and clear commit message describing the change, including the intentions behind the change and non-obvious design decisions. Please make sure that your commit history is clean before opening your Pull Request.
