@@ -35,8 +35,9 @@ app.add_middleware(
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})
 async def health_check() -> dict[str, typing.Union[str, int, list[str]]]:
-    """Return a health check including a unix epoch timestamp."""
+    """Perform an API health check, including timestamp and commit sha."""
     return {
-        "description": "Python Discord API",
+        "description": "Python Discord API Health Check",
+        "commit_sha": settings.commit_sha,
         "timestamp": datetime.datetime.utcnow().timestamp(),
     }

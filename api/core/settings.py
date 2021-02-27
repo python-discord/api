@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     """
 
     auth_token: str
+    commit_sha: str = "development"
     DEBUG: bool = False
 
     class Config:

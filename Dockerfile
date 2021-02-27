@@ -37,4 +37,5 @@ COPY . .
 # Switch over to an unprivileged user.
 USER api
 
-entrypoint ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV commit_sha="development"
+ENTRYPOINT ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
