@@ -30,5 +30,11 @@ class Settings(BaseSettings):
     auth_token: str
     DEBUG: bool = False
 
+    class Config:
+        """Configure Settings to load a `.env` file if present."""
+
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
 
 settings = Settings()
