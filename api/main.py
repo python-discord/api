@@ -1,3 +1,16 @@
+"""
+The main API module that houses the FastAPI app.
+
+This app will receive the various routers created by the
+individual API versions, which in turn hold the routers
+of the individual endpoints within an API version.
+
+The app is initialized with the TokenAuthentication back-end
+that defaults to requiring authentication on *all* endpoints,
+except the `/docs` and the /openapi.json endpoint manifest
+in DEBUG mode.
+"""
+
 import datetime
 import typing
 
@@ -11,7 +24,8 @@ from api.core.settings import settings
 app = FastAPI()
 
 # Add our middleware that will try to authenticate
-# all requests, excluding
+# all requests, excluding /docs and /openapi.json
+# in DEBUG mode.
 app.add_middleware(
     AuthenticationMiddleware,
     backend=TokenAuthentication(token=settings.auth_token),
@@ -21,6 +35,7 @@ app.add_middleware(
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})
 async def health_check() -> dict[str, typing.Union[str, int, list[str]]]:
+    """Return a health check including a unix epoch timestamp."""
     return {
         "description": "Python Discord API",
         "timestamp": datetime.datetime.utcnow().timestamp(),
