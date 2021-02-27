@@ -29,6 +29,7 @@ pytest = "*"
 uvicorn = {version = "~=0.13.4", extras = ["standard"]}
 pytest-asyncio = "*"
 httpx = "*"
+hypothesis = "*"
 
 [requires]
 python_version = "3.9"
