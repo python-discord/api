@@ -21,4 +21,6 @@ For more information about contribution to this project, read the [CONTRIBUTING.
 If you want to propose new features for this API, please open an issue in the Issues-tab in this repository. If your proposal includes a new API endpoint or changes an existing one, please include your initial design for the contract this endpoint offers in your issue. We've created an issue template to give you an idea of how such an issue may look.
 
 ### Setting up a development environment
-The easiest way to set up a development environment is by using [`pipenv`](https://pypi.org/project/pipenv/). After installing `pipenv`, simply run `pipenv sync --dev` in the root of the cloned repository to set up a virtual environment with our development toolkit installed.
+The easiest way to set up a development environment is by using [`poetry`](https://python-poetry.org/). After installing `poetry`, simply run `poetry install` in the root of the cloned repository to set up a virtual environment with our development toolkit installed.
+
+Another option is by using [Docker](https://www.docker.com/). After installing Docker on your machine, you should be able to run the API with `docker compose up`. For older versions of Docker, you may have to install `docker-compose` separately and run `docker-compose up` instead. This should spin up a container that automatically reloads the API if you change one of the files.

@@ -28,7 +28,7 @@ We've compiled a few resources on making good commits:
 ### Code Style
 We value a clear and consistent code style throughout our project. While linting isn't all that matters for writing clean code, we mostly follow [PEP 8](https://www.python.org/dev/peps/pep-0008/) and [PEP 257](https://www.python.org/dev/peps/pep-0257/). The best way to check if your code complies to our style standards is by running our linting setup. We use `flake8`, with several plugins, and `black` to ensure some consistency across different authors.
 
-You can run those tools, with the settings we've configured, by first installing the development environment defined in our [`Pipfile`](Pipfile) with `pipenv sync --dev` and then by running `pipenv run lint`.
+You can run those tools, with the settings we've configured, by first installing the development environment defined in [`pyproject.toml`](pyproject.toml) with `poetry install` and then by running `poetry run flake8`.
 
 ### Test Coverage
 You may think of an API-endpoint as offering a contract: If a client sends a certain request, the API will respond in a certain way. These types of contracts are highly testable and that's why we require tests for all API-endpoints. The resulting test suite will be run automatically in our Continuous Integration pipeline, but you should also make sure to run tests locally before pushing your code. These tests will help us to make sure a change doesn't break something, even if that something is unrelated to the chance at a first glance.

@@ -1,41 +1,49 @@
-FROM python:3.9.2-buster as builder
+FROM python:3.9.5-slim-buster as base
 
-ENV PIP_NO_CACHE_DIR=false \
-    PIPENV_HIDE_EMOJIS=1 \
-    PIPENV_NOSPIN=1
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    POETRY_VERSION=1.1.5 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    INSTALL_DIR="/opt/dependencies" \
+    APP_DIR="/app"
 
-WORKDIR /builder
-
-COPY "Pipfile*" ./
-
-# Build uvicorn with uvloop and other packages
-# that require gcc to compile. We'll copy them
-# over to a slim container later.
-# In addition, we specify the uvicorn dependency
-# here to prevent a `pipenv lock` on Windows from
-# stopping us from using `uvloop`.
-RUN pip install -U pipenv==2020.11.15 \
- && pipenv install --system --deploy \
- && pip install uvicorn[standard]~=0.13.4
-
-FROM python:3.9.2-slim-buster
-
-STOPSIGNAL SIGQUIT
+ENV PATH="$POETRY_HOME/bin:$INSTALL_DIR/.venv/bin:$PATH"
 
 RUN groupadd -g 61000 api \
  && useradd -g 61000 -l -r -u 61000 api
 
-# Copy over the built dependencies and
-# script_entrypoint for uvicorn.
-COPY --from=builder /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
-COPY --from=builder /usr/local/bin/uvicorn /usr/local/bin/uvicorn
+FROM base as builder
+RUN apt-get update \
+  && apt-get -y upgrade \
+  && apt-get install --no-install-recommends -y \
+  curl \
+  build-essential
 
-WORKDIR /app
+RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+
+WORKDIR $INSTALL_DIR
+COPY "pyproject.toml" "poetry.lock" ./
+RUN poetry install --no-dev
+
+FROM base as development
+WORKDIR $APP_DIR
+ENV FASTAPI_ENV=development
+COPY --from=builder $INSTALL_DIR $INSTALL_DIR
 
 COPY . .
+ENTRYPOINT ["uvicorn"]
+CMD ["api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 
-# Switch over to an unprivileged user.
+FROM base as production
+ENV FASTAPI_ENV=production
+COPY --from=builder $INSTALL_DIR $INSTALL_DIR
+
+WORKDIR $APP_DIR
+COPY . .
+RUN python -m compileall api/
+
 USER api
-
-ENV commit_sha="development"
-ENTRYPOINT ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["gunicorn"]
