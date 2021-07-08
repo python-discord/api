@@ -20,6 +20,7 @@ from starlette.middleware.authentication import AuthenticationMiddleware
 from api.core.middleware import TokenAuthentication, on_auth_error
 from api.core.schemas import ErrorMessage, HealthCheck
 from api.core.settings import settings
+from api.v1.router import router as api_router
 
 app = FastAPI()
 
@@ -31,6 +32,7 @@ app.add_middleware(
     backend=TokenAuthentication(token=settings.auth_token),
     on_error=on_auth_error,
 )
+app.include_router(api_router)
 
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})

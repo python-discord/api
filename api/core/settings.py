@@ -29,6 +29,8 @@ class Settings(BaseSettings):
 
     auth_token: str
     commit_sha: str = "development"
+    old_api_endpoint: str
+    old_api_token: str
     DEBUG: bool = False
 
     class Config:

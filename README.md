@@ -24,3 +24,19 @@ If you want to propose new features for this API, please open an issue in the Is
 The easiest way to set up a development environment is by using [`poetry`](https://python-poetry.org/). After installing `poetry`, simply run `poetry install` in the root of the cloned repository to set up a virtual environment with our development toolkit installed.
 
 Another option is by using [Docker](https://www.docker.com/). After installing Docker on your machine, you should be able to run the API with `docker compose up`. For older versions of Docker, you may have to install `docker-compose` separately and run `docker-compose up` instead. This should spin up a container that automatically reloads the API if you change one of the files.
+
+### Local development with old API compatibility layer
+
+If you want to develop against the new API whilst using the proxy feature for
+unimplemented endpoints (such as for running the Python Bot against the new
+API), you need to do the following:
+
+- Create a superuser, if you do not already have one.
+- Start the old API.
+- Log in to the Django Admin.
+- Create an authorization token under the "Tokens" section.
+- Copy the token.
+- Export the token to the new site in the `OLD_API_TOKEN` environment variable.
+- Export the URL pointing to the old site's API in the `OLD_API_ENDPOINT`
+  environment variable. You most likely want to use
+  `http://api.pythondiscord.local:8000/` here.
