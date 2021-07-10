@@ -3,5 +3,6 @@
 
 # Except what we need
 !/api/
-!/Pipfile
-!/Pipfile.lock
+!/pyproject.toml
+!/poetry.lock
+!/gunicorn.conf.py
