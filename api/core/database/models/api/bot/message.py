@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiMessage(Base):
+class Message(Base):
     """A message, sent somewhere on the Discord server."""
 
     __tablename__ = 'api_message'

@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiDeletedmessage(Base):
+class DeletedMessage(Base):
     """A deleted message, previously sent somewhere on the Discord server."""
 
     __tablename__ = 'api_deletedmessage'

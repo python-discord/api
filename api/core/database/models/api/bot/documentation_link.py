@@ -3,7 +3,7 @@ from sqlalchemy import Column, String
 from api.core.database import Base
 
 
-class ApiDocumentationlink(Base):
+class DocumentationLink(Base):
     """A documentation link used by the `!docs` command of the bot."""
 
     __tablename__ = 'api_documentationlink'

@@ -3,7 +3,8 @@ from sqlalchemy import BigInteger, Column, Integer, String
 from api.core.database import Base
 
 
-class ApiRole(Base):
+class Role(Base):
+
     """
     A role on our Discord server.
     The comparison operators <, <=, >, >=, ==, != act the same as they do with Role-objects of the

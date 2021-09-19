@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiMessagedeletioncontext(Base):
+class MessageDeletionContext(Base):
     """
     Represents the context for a deleted message.
 

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiReminder(Base):
+class Reminder(Base):
     """A reminder created by a user."""
 
     __tablename__ = 'api_reminder'

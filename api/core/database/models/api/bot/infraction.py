@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiInfraction(Base):
+class Infraction(Base):
     """An infraction for a Discord user."""
 
     __tablename__ = 'api_infraction'

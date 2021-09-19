@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from api.core.database import Base
 
 
-class ApiBotsetting(Base):
+class BotSetting(Base):
     """A configuration entry for the bot."""
 
     __tablename__ = 'api_botsetting'

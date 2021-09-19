@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiNomination(Base):
+class Nomination(Base):
     """A general helper nomination information created by staff."""
 
     __tablename__ = 'api_nomination'

@@ -3,7 +3,7 @@ from sqlalchemy import ARRAY, BigInteger, Boolean, CheckConstraint, Column, Smal
 from api.core.database import Base
 
 
-class ApiUser(Base):
+class User(Base):
     """A Discord user."""
 
     __tablename__ = 'api_user'

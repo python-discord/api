@@ -3,7 +3,7 @@ from sqlalchemy import Column, DateTime, Integer, String
 from api.core.database import Base
 
 
-class HomeRepositorymetadatum(Base):
+class RepositoryMetaData(Base):
     """Information about one of our repos fetched from the GitHub API."""
 
     __tablename__ = 'home_repositorymetadata'

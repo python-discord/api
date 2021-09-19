@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, UniqueC
 from api.core.database import Base
 
 
-class ApiFilterlist(Base):
+class FilterList(Base):
     """An item that is either allowed or denied."""
 
     __tablename__ = 'api_filterlist'
