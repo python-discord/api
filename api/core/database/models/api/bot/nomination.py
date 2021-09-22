@@ -7,7 +7,7 @@ from api.core.database import Base
 class Nomination(Base):
     """A general helper nomination information created by staff."""
 
-    __tablename__ = 'api_nomination'
+    __tablename__ = 'nomination'
 
     active = Column(Boolean, nullable=False)
     user_id = Column(ForeignKey('api_user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)

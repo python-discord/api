@@ -6,7 +6,7 @@ from api.core.database import Base
 class RepositoryMetaData(Base):
     """Information about one of our repos fetched from the GitHub API."""
 
-    __tablename__ = 'home_repositorymetadata'
+    __tablename__ = 'repositorymetadata'
 
     last_updated = Column(DateTime(True), nullable=False)
     repo_name = Column(String(40), primary_key=True, index=True)

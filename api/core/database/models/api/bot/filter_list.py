@@ -6,7 +6,7 @@ from api.core.database import Base
 class FilterList(Base):
     """An item that is either allowed or denied."""
 
-    __tablename__ = 'api_filterlist'
+    __tablename__ = 'filterlist'
     __table_args__ = (
         UniqueConstraint('content', 'type'),
     )

@@ -7,7 +7,7 @@ from api.core.database import Base
 class Infraction(Base):
     """An infraction for a Discord user."""
 
-    __tablename__ = 'api_infraction'
+    __tablename__ = 'infraction'
     __table_args__ = (
         Index('unique_active_infraction_per_type_per_user', 'user_id', 'type', unique=True),
     )

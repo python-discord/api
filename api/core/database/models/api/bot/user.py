@@ -6,7 +6,7 @@ from api.core.database import Base
 class User(Base):
     """A Discord user."""
 
-    __tablename__ = 'api_user'
+    __tablename__ = 'user'
     __table_args__ = (
         CheckConstraint('discriminator >= 0'),
     )

@@ -8,7 +8,7 @@ from api.core.database import Base
 class Message(Base):
     """A message, sent somewhere on the Discord server."""
 
-    __tablename__ = 'api_message'
+    __tablename__ = 'message'
 
     id = Column(BigInteger, primary_key=True)
     channel_id = Column(BigInteger, nullable=False)

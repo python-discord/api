@@ -7,7 +7,7 @@ from api.core.database import Base
 class Reminder(Base):
     """A reminder created by a user."""
 
-    __tablename__ = 'api_reminder'
+    __tablename__ = 'reminder'
 
     id = Column(Integer, primary_key=True, server_default=text("nextval('api_reminder_id_seq'::regclass)"))
     active = Column(Boolean, nullable=False)

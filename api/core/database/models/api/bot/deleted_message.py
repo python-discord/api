@@ -8,7 +8,7 @@ from api.core.database import Base
 class DeletedMessage(Base):
     """A deleted message, previously sent somewhere on the Discord server."""
 
-    __tablename__ = 'api_deletedmessage'
+    __tablename__ = 'deletedmessage'
 
     id = Column(BigInteger, primary_key=True)
     channel_id = Column(BigInteger, nullable=False)

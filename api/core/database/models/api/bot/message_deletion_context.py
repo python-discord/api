@@ -12,7 +12,7 @@ class MessageDeletionContext(Base):
     This helps to keep track of message deletions on the server.
     """
 
-    __tablename__ = 'api_messagedeletioncontext'
+    __tablename__ = 'messagedeletioncontext'
 
     id = Column(
         Integer,
