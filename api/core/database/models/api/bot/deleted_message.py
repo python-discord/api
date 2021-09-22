@@ -15,16 +15,16 @@ class DeletedMessage(Base):
     content = Column(String(4000), nullable=False)
     embeds = Column(ARRAY(JSONB(astext_type=Text())), nullable=False)
     author_id = Column(
-        ForeignKey('api_user.id', deferrable=True, initially='DEFERRED'),
+        ForeignKey('user.id', deferrable=True, initially='DEFERRED'),
         nullable=False,
         index=True
     )
     deletion_context_id = Column(
-        ForeignKey('api_messagedeletioncontext.id', deferrable=True, initially='DEFERRED'),
+        ForeignKey('messagedeletioncontext.id', deferrable=True, initially='DEFERRED'),
         nullable=False,
         index=True
     )
     attachments = Column(ARRAY(String(length=512)), nullable=False)
 
-    author = relationship('ApiUser')
-    deletion_context = relationship('ApiMessagedeletioncontext')
+    author = relationship('User')
+    deletion_context = relationship('Messagedeletioncontext')

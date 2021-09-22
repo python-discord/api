@@ -10,11 +10,11 @@ class Nomination(Base):
     __tablename__ = 'nomination'
 
     active = Column(Boolean, nullable=False)
-    user_id = Column(ForeignKey('api_user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
+    user_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
     inserted_at = Column(DateTime(True), nullable=False)
-    id = Column(Integer, primary_key=True, server_default=text("nextval('api_nomination_id_seq'::regclass)"))
+    id = Column(Integer, primary_key=True, server_default=text("nextval('nomination_id_seq'::regclass)"))
     end_reason = Column(Text, nullable=False)
     ended_at = Column(DateTime(True))
     reviewed = Column(Boolean, nullable=False)
 
-    user = relationship('ApiUser')
+    user = relationship('User')
