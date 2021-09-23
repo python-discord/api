@@ -1,4 +1,4 @@
-from typing import Union, NoReturn
+from typing import NoReturn, Union
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, String, Text, text
 from sqlalchemy.orm import relationship

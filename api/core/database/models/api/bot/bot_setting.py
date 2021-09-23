@@ -1,4 +1,4 @@
-from typing import Union, NoReturn
+from typing import NoReturn, Union
 
 from sqlalchemy import Column, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
@@ -23,4 +23,3 @@ class BotSetting(Base):
         )
         if name not in known_settings:
             raise ValueError(f"`{name}` is not a known bot setting name.")
-

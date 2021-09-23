@@ -1,5 +1,6 @@
 from sqlalchemy import ARRAY, BigInteger, Boolean, Column, DateTime, ForeignKey, Integer, String, text
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import validates
 
 from api.core.database import Base
 
@@ -19,3 +20,13 @@ class Reminder(Base):
     mentions = Column(ARRAY(BigInteger()), nullable=False)
 
     author = relationship('User')
+
+    @validates('channel_id')
+    def validate_rchannel_id(self, _, channel_id: int) -> None:
+        if channel_id < 0:
+            raise ValueError("Channel IDs cannot be negative.")
+
+    @validates('mentions')
+    def validate_mentions(self, _, mentions: int) -> None:
+        if mentions < 0:
+            raise ValueError("Mention IDs cannot be negative.")

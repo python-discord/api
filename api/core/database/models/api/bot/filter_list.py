@@ -1,7 +1,8 @@
-from typing import Union, NoReturn
+from typing import NoReturn, Union
 
 from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, UniqueConstraint, text
 from sqlalchemy.orm import validates
+
 from api.core.database import Base
 
 
@@ -26,4 +27,3 @@ class FilterList(Base):
         choices = ('GUILD_INVITE', 'FILE_FORMAT', 'DOMAIN_NAME', 'FILTER_TOKEN')
         if type not in choices:
             raise ValueError(f"{type} is not a valid FilterList type")
-

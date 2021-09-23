@@ -1,8 +1,9 @@
 import re
-from typing import Union, NoReturn
+from typing import NoReturn, Union
 
 from sqlalchemy import Column, String
 from sqlalchemy.orm import validates
+
 from api.core.database import Base
 
 
