@@ -29,7 +29,6 @@ class User(Base):
             raise ValueError("Discriminators may not exceed `9999`.")
 
     @validates('roles')
-    def validate_roles(self, _, roles: int) -> None:
-        for role in roles:
-            if role < 0:
-                raise ValueError("Role IDs cannot be negative")
+    def validate_roles(self, _, role: int) -> None:
+        if role < 0:
+            raise ValueError("Role IDs cannot be negative")
