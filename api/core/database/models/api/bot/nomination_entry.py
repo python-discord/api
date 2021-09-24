@@ -7,7 +7,7 @@ from api.core.database import Base
 class ApiNominationentry(Base):
     __tablename__ = 'nominationentry'
 
-    id = Column(Integer, primary_key=True, server_default=text("nextval('nominationentry_id_seq'::regclass)"))
+    id = Column(Integer, primary_key=True, autoincrement=True)
     reason = Column(Text, nullable=False)
     inserted_at = Column(DateTime(True), nullable=False)
     actor_id = Column(ForeignKey('api_user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)

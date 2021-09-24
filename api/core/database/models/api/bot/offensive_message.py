@@ -19,14 +19,17 @@ class OffensiveMessage(Base):
     def validate_ofmessage_id(self, _, message_id: int) -> None:
         if message_id < 0:
             raise ValueError("Message IDs cannot be negative.")
+        return message_id
 
     @validates('channel_id')
     def validate_ofchannel_id(self, _, channel_id: int) -> None:
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
+        return channel_id
 
     @validates('delete_date')
     def future_date_validator(self, date: datetime.date) -> None:
         """Raise ValidationError if the date isn't a future date."""
         if date < datetime.datetime.now(datetime.timezone.utc):
             raise ValueError("Date must be a future date")
+        return date

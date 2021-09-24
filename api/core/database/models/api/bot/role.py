@@ -29,8 +29,12 @@ class Role(Base):
     def validate_colour(self, _, colour: int):
         if colour < 0:
             raise ValueError("Colour hex cannot be negative.")
+        else:
+            return colour
 
     @validates('permissions')
     def validate_permission(self, _, permission: int):
         if permission < 0:
             raise ValueError("Role permissions cannot be negative.")
+        else:
+            return permission

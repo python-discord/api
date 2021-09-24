@@ -15,7 +15,7 @@ class Infraction(Base):
         Index('unique_active_infraction_per_type_per_user', 'user_id', 'type', unique=True),
     )
 
-    id = Column(Integer, primary_key=True, server_default=text("nextval('infraction_id_seq'::regclass)"))
+    id = Column(Integer, primary_key=True, autoincrement=True)
     inserted_at = Column(DateTime(True), nullable=False)
     expires_at = Column(DateTime(True))
     active = Column(Boolean, nullable=False)
@@ -33,3 +33,4 @@ class Infraction(Base):
         type_choices = ("note", "warning", "watch", "mute", "kick", "ban", "superstar", "voice_ban")
         if type not in type_choices:
             raise ValueError(f"{type} is not a valid Infraction type!")
+        return type

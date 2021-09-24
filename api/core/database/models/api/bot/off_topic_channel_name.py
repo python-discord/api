@@ -18,3 +18,4 @@ class OffTopicChannelName(Base):
     def validate_name(self, _, name: str) -> None:
         if not re.match(r"^[a-z0-9\U0001d5a0-\U0001d5b9-ǃ？’']+$", name):
             raise ValueError(f"{name} is not a valid Off Topic channel name!")
+        return name

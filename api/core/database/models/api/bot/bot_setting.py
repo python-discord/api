@@ -23,3 +23,4 @@ class BotSetting(Base):
         )
         if name not in known_settings:
             raise ValueError(f"`{name}` is not a known bot setting name.")
+        return name

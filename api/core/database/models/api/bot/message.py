@@ -24,8 +24,10 @@ class Message(Base):
     def validate_message_id(self, _, message_id: int) -> None:
         if message_id < 0:
             raise ValueError("Message IDs cannot be negative.")
+        return message_id
 
     @validates('channel_id')
     def validate_channel_id(self, _, channel_id: int) -> None:
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
+        return channel_id

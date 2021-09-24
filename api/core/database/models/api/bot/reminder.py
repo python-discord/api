@@ -10,7 +10,7 @@ class Reminder(Base):
 
     __tablename__ = 'reminder'
 
-    id = Column(Integer, primary_key=True, server_default=text("nextval('reminder_id_seq'::regclass)"))
+    id = Column(Integer, primary_key=True, autoincrement=True)
     active = Column(Boolean, nullable=False)
     channel_id = Column(BigInteger, nullable=False)
     content = Column(String(1500), nullable=False)
@@ -25,8 +25,10 @@ class Reminder(Base):
     def validate_rchannel_id(self, _, channel_id: int) -> None:
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
+        return channel_id
 
     @validates('mentions')
     def validate_mentions(self, _, mentions: int) -> None:
         if mentions < 0:
             raise ValueError("Mention IDs cannot be negative.")
+        return mentions

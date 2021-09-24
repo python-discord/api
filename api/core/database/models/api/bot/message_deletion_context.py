@@ -17,7 +17,7 @@ class MessageDeletionContext(Base):
     id = Column(
         Integer,
         primary_key=True,
-        server_default=text("nextval('messagedeletioncontext_id_seq'::regclass)")
+        autoincrement=True
     )
     creation = Column(DateTime(True), nullable=False)
     actor_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), index=True)

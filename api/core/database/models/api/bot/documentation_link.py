@@ -20,9 +20,11 @@ class DocumentationLink(Base):
     def validate_base_url(self, _, url: str) -> Union[None, NoReturn]:
         if not url.endswith("/"):
             raise ValueError("The entered URL must end with a slash.")
+        return url
 
     @validates('package')
     def validate_package(self, _, package: str) -> Union[None, NoReturn]:
         pattern = re.compile(r"^[a-z0-9_]+$")
         if not pattern.match(package):
             raise ValueError("Package names can only consist of lowercase a-z letters, digits, and underscores.")
+        return package

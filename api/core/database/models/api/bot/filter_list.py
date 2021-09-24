@@ -14,7 +14,7 @@ class FilterList(Base):
         UniqueConstraint('content', 'type'),
     )
 
-    id = Column(Integer, primary_key=True, server_default=text("nextval('filterlist_id_seq'::regclass)"))
+    id = Column(Integer, primary_key=True, autoincrement=True)
     created_at = Column(DateTime(True), nullable=False)
     updated_at = Column(DateTime(True), nullable=False)
     type = Column(String(50), nullable=False)
@@ -27,3 +27,4 @@ class FilterList(Base):
         choices = ('GUILD_INVITE', 'FILE_FORMAT', 'DOMAIN_NAME', 'FILTER_TOKEN')
         if type not in choices:
             raise ValueError(f"{type} is not a valid FilterList type")
+        return type
