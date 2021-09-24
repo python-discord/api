@@ -1,7 +1,13 @@
 from sqlalchemy import ARRAY, BigInteger, Boolean, CheckConstraint, Column, SmallInteger, String
-from sqlalchemy.orm import validates
+from sqlalchemy import create_engine
+from sqlalchemy.orm import validates, sessionmaker
 
 from api.core.database import Base
+from .role import Role
+from api.core.settings import settings
+
+engine = create_engine(settings.database_url)
+SessionLocal = sessionmaker(bind=engine)
 
 
 class User(Base):
@@ -31,7 +37,10 @@ class User(Base):
 
     @validates('roles')
     def validate_roles(self, _, roles: list[int]) -> None:
+        session = SessionLocal()
         for role in roles:
             if role < 0:
                 raise ValueError("Role IDs cannot be negative")
+            if not session.query(Role).filter_by(id=role).first():
+                raise ValueError(f"Role with ID {role} does not exist")
         return roles
