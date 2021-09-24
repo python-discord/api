@@ -27,4 +27,4 @@ class DeletedMessage(Base):
     attachments = Column(ARRAY(String(length=512)), nullable=False)
 
     author = relationship('User')
-    deletion_context = relationship('Messagedeletioncontext')
+    deletion_context = relationship('MessageDeletionContext')
