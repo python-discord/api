@@ -1,3 +1,5 @@
+from typing import NoReturn, Union
+
 from sqlalchemy import BigInteger, Column, Integer, String
 from sqlalchemy.orm import validates
 
@@ -21,20 +23,22 @@ class Role(Base):
     position = Column(Integer, nullable=False)
 
     @validates('id')
-    def validate_role_id(self, _, role_id: int):
+    def validate_role_id(self, _key: str, role_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if role_id < 0:
             raise ValueError("Role IDs cannot be negative.")
+        return role_id
 
     @validates('colour')
-    def validate_colour(self, _, colour: int):
+    def validate_colour(self, _key: str, colour: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided colour hex is negative."""
         if colour < 0:
             raise ValueError("Colour hex cannot be negative.")
-        else:
-            return colour
+        return colour
 
     @validates('permissions')
-    def validate_permission(self, _, permission: int):
+    def validate_permission(self, _key: str, permission: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided permission code is negative."""
         if permission < 0:
             raise ValueError("Role permissions cannot be negative.")
-        else:
-            return permission
+        return permission

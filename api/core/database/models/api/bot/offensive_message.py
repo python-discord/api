@@ -1,4 +1,5 @@
 import datetime
+from typing import NoReturn, Union
 
 from sqlalchemy import BigInteger, Column, DateTime
 from sqlalchemy.orm import validates
@@ -16,20 +17,22 @@ class OffensiveMessage(Base):
     delete_date = Column(DateTime(True), nullable=False)
 
     @validates('id')
-    def validate_ofmessage_id(self, _, message_id: int) -> None:
+    def validate_ofmessage_id(self, _key: str, message_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if message_id < 0:
             raise ValueError("Message IDs cannot be negative.")
         return message_id
 
     @validates('channel_id')
-    def validate_ofchannel_id(self, _, channel_id: int) -> None:
+    def validate_ofchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
         return channel_id
 
     @validates('delete_date')
-    def future_date_validator(self, date: datetime.date) -> None:
-        """Raise ValidationError if the date isn't a future date."""
+    def future_date_validator(self, _key: str, date: datetime.date) -> Union[datetime.date, NoReturn]:
+        """Raise ValueError if the date isn't a future date."""
         if date < datetime.datetime.now(datetime.timezone.utc):
             raise ValueError("Date must be a future date")
         return date

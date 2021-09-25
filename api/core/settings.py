@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     variable is found, instantiating this class will raise a
     `pydantic.error_wrappers.ValidationError` exception.
     """
+
     database_url: str
     auth_token: str
     commit_sha: str = "development"

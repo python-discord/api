@@ -1,4 +1,6 @@
-from sqlalchemy import ARRAY, BigInteger, Boolean, Column, DateTime, ForeignKey, Integer, String, text
+from typing import NoReturn, Union
+
+from sqlalchemy import ARRAY, BigInteger, Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import validates
 
@@ -22,13 +24,16 @@ class Reminder(Base):
     author = relationship('User')
 
     @validates('channel_id')
-    def validate_rchannel_id(self, _, channel_id: int) -> None:
+    def validate_rchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
         return channel_id
 
     @validates('mentions')
-    def validate_mentions(self, _, mentions: int) -> None:
-        if mentions < 0:
-            raise ValueError("Mention IDs cannot be negative.")
+    def validate_mentions(self, _key: str, mentions: list[int]) -> Union[list[int], NoReturn]:
+        """Raise ValueError if either of the provided mentions is negative."""
+        for mention in mentions:
+            if mention < 0:
+                raise ValueError("Mention IDs cannot be negative.")
         return mentions

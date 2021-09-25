@@ -16,7 +16,8 @@ class BotSetting(Base):
     data = Column(JSONB(astext_type=Text()), nullable=False)
 
     @validates('name')
-    def validate_name(self, _, name: str) -> Union[None, NoReturn]:
+    def validate_name(self, _key: str, name: str) -> Union[str, NoReturn]:
+        """Raise ValueError if the provided name is not in the known settings."""
         known_settings = (
             'defcon',
             'news',

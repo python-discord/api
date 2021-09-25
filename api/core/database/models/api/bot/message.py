@@ -1,3 +1,5 @@
+from typing import NoReturn, Union
+
 from sqlalchemy import ARRAY, BigInteger, Column, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
@@ -21,13 +23,15 @@ class Message(Base):
     author = relationship('User')
 
     @validates('id')
-    def validate_message_id(self, _, message_id: int) -> None:
+    def validate_message_id(self, _key: str, message_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if message_id < 0:
             raise ValueError("Message IDs cannot be negative.")
         return message_id
 
     @validates('channel_id')
-    def validate_channel_id(self, _, channel_id: int) -> None:
+    def validate_channel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
         return channel_id

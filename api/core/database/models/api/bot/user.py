@@ -1,10 +1,12 @@
+from typing import NoReturn, Union
+
 from sqlalchemy import ARRAY, BigInteger, Boolean, CheckConstraint, Column, SmallInteger, String
 from sqlalchemy import create_engine
-from sqlalchemy.orm import validates, sessionmaker
+from sqlalchemy.orm import sessionmaker, validates
 
 from api.core.database import Base
-from .role import Role
 from api.core.settings import settings
+from .role import Role
 
 engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(bind=engine)
@@ -25,18 +27,22 @@ class User(Base):
     roles = Column(ARRAY(BigInteger()), nullable=False)
 
     @validates('id')
-    def validate_user_id(self, _, user_id: int) -> None:
+    def validate_user_id(self, _key: str, user_id: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided id is negative."""
         if user_id < 0:
             raise ValueError("User IDs cannot be negative.")
+        return user_id
 
     @validates('discriminator')
-    def validate_discriminator(self, _, discriminator: int) -> None:
+    def validate_discriminator(self, _key: str, discriminator: int) -> Union[int, NoReturn]:
+        """Raise ValueError if the provided discriminator is exceeds `9999`."""
         if discriminator > 9999:
             raise ValueError("Discriminators may not exceed `9999`.")
         return discriminator
 
     @validates('roles')
-    def validate_roles(self, _, roles: list[int]) -> None:
+    def validate_roles(self, _key: str, roles: list[int]) -> Union[list[int], NoReturn]:
+        """Raise ValueError if the provided role(s) is negative or non-existent."""
         session = SessionLocal()
         for role in roles:
             if role < 0:

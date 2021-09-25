@@ -1,6 +1,6 @@
 from typing import NoReturn, Union
 
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, UniqueConstraint, text
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import validates
 
 from api.core.database import Base
@@ -23,8 +23,9 @@ class FilterList(Base):
     comment = Column(Text)
 
     @validates('type')
-    def validate_type(self, _, type: str) -> Union[None, NoReturn]:
+    def validate_type(self, _key: str, typeval: str) -> Union[str, NoReturn]:
+        """Raise ValueError if the provided type is not in the list of valid types."""
         choices = ('GUILD_INVITE', 'FILE_FORMAT', 'DOMAIN_NAME', 'FILTER_TOKEN')
-        if type not in choices:
-            raise ValueError(f"{type} is not a valid FilterList type")
-        return type
+        if typeval not in choices:
+            raise ValueError(f"{typeval} is not a valid FilterList type")
+        return typeval

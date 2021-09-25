@@ -17,13 +17,15 @@ class DocumentationLink(Base):
     inventory_url = Column(String(200), nullable=False)
 
     @validates('base_url')
-    def validate_base_url(self, _, url: str) -> Union[None, NoReturn]:
+    def validate_base_url(self, _key: str, url: str) -> Union[str, NoReturn]:
+        """Raise ValueError if the provided url does not start with a slash('/')."""
         if not url.endswith("/"):
             raise ValueError("The entered URL must end with a slash.")
         return url
 
     @validates('package')
-    def validate_package(self, _, package: str) -> Union[None, NoReturn]:
+    def validate_package(self, _key: str, package: str) -> Union[str, NoReturn]:
+        """Raise ValueError if the provided package name does not meet the conditions."""
         pattern = re.compile(r"^[a-z0-9_]+$")
         if not pattern.match(package):
             raise ValueError("Package names can only consist of lowercase a-z letters, digits, and underscores.")

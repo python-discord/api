@@ -1,6 +1,6 @@
 from typing import NoReturn, Union
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, String, Text, text
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, String, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import validates
 
@@ -29,8 +29,9 @@ class Infraction(Base):
     user = relationship('User', primaryjoin='Infraction.user_id == User.id')
 
     @validates('type')
-    def validate_type(self, _, type: str) -> Union[None, NoReturn]:
+    def validate_type(self, _key: str, infrtype: str) -> Union[str, NoReturn]:
+        """Raise ValueError if the provided Infranction type is not in the list of supported types."""
         type_choices = ("note", "warning", "watch", "mute", "kick", "ban", "superstar", "voice_ban")
-        if type not in type_choices:
-            raise ValueError(f"{type} is not a valid Infraction type!")
-        return type
+        if infrtype not in type_choices:
+            raise ValueError(f"{infrtype} is not a valid Infraction type!")
+        return infrtype

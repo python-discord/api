@@ -15,12 +15,12 @@ import datetime
 import typing
 
 from fastapi import FastAPI
-from starlette.middleware.authentication import AuthenticationMiddleware
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
+from starlette.middleware.authentication import AuthenticationMiddleware
 
-from api.core.middleware import TokenAuthentication, on_auth_error
 from api.core.database import Base
+from api.core.middleware import TokenAuthentication, on_auth_error
 from api.core.schemas import ErrorMessage, HealthCheck
 from api.core.settings import settings
 
