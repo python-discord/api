@@ -1,4 +1,5 @@
 from typing import NoReturn, Union
+from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, String, Text
 from sqlalchemy.orm import relationship
@@ -16,17 +17,34 @@ class Infraction(Base):
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    inserted_at = Column(DateTime(True), nullable=False)
+
+    # The date and time of the creation of this infraction.
+    inserted_at = Column(DateTime(True), nullable=False, default=datetime.now)
+
+    # The date and time of the expiration of this infraction.
+    # Null if the infraction is permanent or it can't expire.
     expires_at = Column(DateTime(True))
+
+    # Whether the infraction is still active.
     active = Column(Boolean, nullable=False)
+
+    # The type of the infraction.
     type = Column(String(9), nullable=False)
+
+    # The reason for the infraction.
     reason = Column(Text)
+
+    # Whether the infraction is a shadow infraction.
     hidden = Column(Boolean, nullable=False)
+
     actor_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
     user_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
 
-    actor = relationship('User', primaryjoin='Infraction.actor_id == User.id')
-    user = relationship('User', primaryjoin='Infraction.user_id == User.id')
+    # The user which applied the infraction.
+    actor = relationship('User', primaryjoin='Infraction.actor_id == User.id', cascade="all, delete")
+
+    # The user to which the infraction was applied.
+    user = relationship('User', primaryjoin='Infraction.user_id == User.id', cascade="all, delete")
 
     @validates('type')
     def validate_type(self, _key: str, infrtype: str) -> Union[str, NoReturn]:

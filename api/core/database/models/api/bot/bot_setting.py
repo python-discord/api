@@ -13,6 +13,7 @@ class BotSetting(Base):
     __tablename__ = 'botsetting'
 
     name = Column(String(50), primary_key=True, index=True)
+    # The actual settings of this setting.
     data = Column(JSONB(astext_type=Text()), nullable=False)
 
     @validates('name')

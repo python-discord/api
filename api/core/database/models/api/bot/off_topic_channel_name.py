@@ -12,8 +12,11 @@ class OffTopicChannelName(Base):
 
     __tablename__ = 'offtopicchannelname'
 
+    # The actual channel name that will be used on our Discord server.
     name = Column(String(96), primary_key=True, index=True)
-    used = Column(Boolean, nullable=False)
+
+    # Whether or not this name has already been used during this rotation
+    used = Column(Boolean, nullable=False, default=False)
 
     @validates("name")
     def validate_name(self, _key: str, name: str) -> Union[str, NoReturn]:

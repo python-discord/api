@@ -13,7 +13,12 @@ class OffensiveMessage(Base):
     __tablename__ = 'offensivemessage'
 
     id = Column(BigInteger, primary_key=True)
+
+    # The channel ID that the message was
+    # sent in, taken from Discord.
     channel_id = Column(BigInteger, nullable=False)
+
+    # The date on which the message will be auto-deleted.
     delete_date = Column(DateTime(True), nullable=False)
 
     @validates('id')

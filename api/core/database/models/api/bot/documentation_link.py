@@ -11,9 +11,14 @@ class DocumentationLink(Base):
     """A documentation link used by the `!docs` command of the bot."""
 
     __tablename__ = 'documentationlink'
-
+    # The Python package name that this documentation link belongs to.
     package = Column(String(50), primary_key=True, index=True)
+
+    # The base URL from which documentation will be available for this project.
+    # Used to generate links to various symbols within this package.
     base_url = Column(String(200), nullable=False)
+
+    # The URL at which the Sphinx inventory is available for this package.
     inventory_url = Column(String(200), nullable=False)
 
     @validates('base_url')

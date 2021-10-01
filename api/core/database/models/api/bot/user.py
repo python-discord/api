@@ -20,10 +20,19 @@ class User(Base):
         CheckConstraint('discriminator >= 0'),
     )
 
+    # The ID of this user, taken from Discord.
     id = Column(BigInteger, primary_key=True)
+
+    # The username, taken from Discord.
     name = Column(String(32), nullable=False)
+
+    # Discriminators may not exceed `9999`."
     discriminator = Column(SmallInteger, nullable=False)
-    in_guild = Column(Boolean, nullable=False)
+
+    # Whether this user is in our server.
+    in_guild = Column(Boolean, nullable=False, default=True)
+
+    # IDs of roles the user has on the server
     roles = Column(ARRAY(BigInteger()), nullable=False)
 
     @validates('id')

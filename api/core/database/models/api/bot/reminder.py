@@ -13,15 +13,29 @@ class Reminder(Base):
     __tablename__ = 'reminder'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    active = Column(Boolean, nullable=False)
-    channel_id = Column(BigInteger, nullable=False)
-    content = Column(String(1500), nullable=False)
-    expiration = Column(DateTime(True), nullable=False)
-    author_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
-    jump_url = Column(String(88), nullable=False)
-    mentions = Column(ARRAY(BigInteger()), nullable=False)
 
-    author = relationship('User')
+    # Whether this reminder is still active.
+    # If not, it has been sent out to the user.
+    active = Column(Boolean, nullable=False)
+    # The channel ID that this message was
+    # sent in, taken from Discord.
+    channel_id = Column(BigInteger, nullable=False)
+
+    # The content that the user wants to be reminded of.
+    content = Column(String(1500), nullable=False)
+
+    # When this reminder should be sent.
+    expiration = Column(DateTime(True), nullable=False)
+
+    author_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
+
+    # The jump url to the message that created the reminder
+    jump_url = Column(String(88), nullable=False)
+    # IDs of roles or users to ping with the reminder.
+    mentions = Column(ARRAY(BigInteger()), nullable=False, default=[])
+
+    # The creator of this reminder.
+    author = relationship('User', cascade="all, delete")
 
     @validates('channel_id')
     def validate_rchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:

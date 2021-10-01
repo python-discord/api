@@ -17,9 +17,17 @@ class FilterList(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_at = Column(DateTime(True), nullable=False)
     updated_at = Column(DateTime(True), nullable=False)
+
+    # The type of allowlist this is on
     type = Column(String(50), nullable=False)
+
+    # Whether this item is on the allowlist or the denylist.
     allowed = Column(Boolean, nullable=False)
+
+    # The data to add to the allow or denylist.
     content = Column(Text, nullable=False)
+
+    # Optional comment on this entry.
     comment = Column(Text)
 
     @validates('type')

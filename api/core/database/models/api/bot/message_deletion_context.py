@@ -19,7 +19,14 @@ class MessageDeletionContext(Base):
         primary_key=True,
         autoincrement=True
     )
+
+    # When this deletion took place.
     creation = Column(DateTime(True), nullable=False)
+
     actor_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), index=True)
 
-    actor = relationship('User')
+    # The original actor causing this deletion. Could be the author
+    # of a manual clean command invocation, the bot when executing
+    # automatic actions, or nothing to indicate that the bulk
+    # deletion was not issued by us.
+    actor = relationship('User', cascade="all, delete")
