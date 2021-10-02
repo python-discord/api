@@ -30,11 +30,11 @@ class Role(Base):
     # The position of the role in the role hierarchy of the Discord Guild.
     position = Column(Integer, nullable=False)
 
-    def __lt__(self, other: Role) -> bool:
+    def __lt__(self, other: 'Role') -> bool:
         """Compares the roles based on their position in the role hierarchy of the guild."""
         return self.position < other.position
 
-    def __le__(self, other: Role) -> bool:
+    def __le__(self, other: 'Role') -> bool:
         """Compares the roles based on their position in the role hierarchy of the guild."""
         return self.position <= other.position
 
