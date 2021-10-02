@@ -1,5 +1,5 @@
-from typing import NoReturn, Union, Any
 from collections.abc import Mapping
+from typing import Any, NoReturn, Union
 
 from sqlalchemy import ARRAY, BigInteger, Column, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
@@ -125,6 +125,14 @@ class Message(Base):
 
     @validates("embeds")
     def validate_embeds(self, _key: str, embeds: list[Mapping]) -> Union[list[Mapping], NoReturn]:
+        """
+        Validate a JSON document containing an embed as possible to send on Discord.
+
+        This attempts to rebuild the validation used by Discord
+        as well as possible by checking for various embed limits so we can
+        ensure that any embed we store here will also be accepted as a
+        valid embed by the Discord API.
+        """
         all_keys = {
             'title', 'type', 'description', 'url', 'timestamp',
             'color', 'footer', 'image', 'thumbnail', 'video',
@@ -160,7 +168,7 @@ class Message(Base):
                 if required_key in embed and not embed[required_key]:
                     raise ValueError(f"Key {required_key!r} must not be empty.")
 
-            for field_name, value in embed.items():
+            for field_name in embed:
                 if field_name not in all_keys:
                     raise ValueError(f"Unknown field name: {field_name!r}")
 

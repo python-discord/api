@@ -1,5 +1,5 @@
-from typing import NoReturn, Union
 from datetime import datetime
+from typing import NoReturn, Union
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, String, Text
 from sqlalchemy.orm import relationship

@@ -13,6 +13,7 @@ class Role(Base):
     The comparison operators <, <=, >, >=, ==, != act the same as they do with Role-objects of the
     discord.py library, see https://discordpy.readthedocs.io/en/latest/api.html#discord.Role
     """
+
     __tablename__ = 'role'
 
     # The role ID, taken from Discord.
