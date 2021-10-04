@@ -24,6 +24,7 @@ jobs:
       PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit-cache
 
       AUTH_TOKEN: ci-token
+      DATABASE_URL: postgres://pysite:pysite@postgres:5432/pysite
 
     # Via https://github.com/actions/example-services/blob/main/.github/workflows/postgres-service.yml
     # services:
