@@ -1,6 +1,8 @@
-from sqlalchemy import ARRAY, BigInteger, Column, ForeignKey, String, Text
-from sqlalchemy.dialects.postgresql import JSONB
+
+
+from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
+
 
 from api.core.database import Base
 
@@ -10,22 +12,11 @@ class DeletedMessage(Base):
 
     __tablename__ = 'deletedmessage'
 
-    id = Column(BigInteger, primary_key=True)
-    channel_id = Column(BigInteger, nullable=False)
-    content = Column(String(4000), nullable=False)
-    embeds = Column(ARRAY(JSONB(astext_type=Text())), nullable=False)
-    author_id = Column(
-        ForeignKey('user.id', deferrable=True, initially='DEFERRED'),
-        nullable=False,
-        index=True
-    )
     deletion_context_id = Column(
         ForeignKey('messagedeletioncontext.id', deferrable=True, initially='DEFERRED'),
         nullable=False,
         index=True
     )
-    attachments = Column(ARRAY(String(length=512)), nullable=False)
 
-    author = relationship('User')
     # The deletion context this message is part of.
     deletion_context = relationship('MessageDeletionContext', cascade="all, delete")

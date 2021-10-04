@@ -49,8 +49,8 @@ class Role(Base):
     @validates('colour')
     def validate_colour(self, _key: str, colour: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided colour hex is negative."""
-        if colour < 0:
-            raise ValueError("Colour hex cannot be negative.")
+        if colour < 0 or colour > 16_777_216:
+            raise ValueError("Colour hex cannot be negative, or reach the total hex combinations available.")
         return colour
 
     @validates('permissions')

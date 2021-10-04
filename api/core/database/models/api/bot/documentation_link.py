@@ -11,6 +11,7 @@ class DocumentationLink(Base):
     """A documentation link used by the `!docs` command of the bot."""
 
     __tablename__ = 'documentationlink'
+
     # The Python package name that this documentation link belongs to.
     package = Column(String(50), primary_key=True, index=True)
 

@@ -29,7 +29,7 @@ class OffensiveMessage(Base):
         return message_id
 
     @validates('channel_id')
-    def validate_ofchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
+    def validate_offmchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")

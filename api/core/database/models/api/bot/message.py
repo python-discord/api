@@ -117,7 +117,7 @@ class Message(Base):
         return message_id
 
     @validates('channel_id')
-    def validate_channel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
+    def validate_mchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
             raise ValueError("Channel IDs cannot be negative.")
