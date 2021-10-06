@@ -38,5 +38,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
 start = "uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload"
-lint = "black . && flake8 ."
+lint = "black . --check --diff && flake8 . --diff"
 test = "pytest"
