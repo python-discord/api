@@ -46,7 +46,7 @@ class User(Base):
     def validate_discriminator(self, _key: str, discriminator: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided discriminator is exceeds `9999`."""
         if discriminator > 9999 or discriminator <= 0:
-            raise ValueError("Discriminators may not exceed `9999` or be below `0000`.")
+            raise ValueError("Discriminators may not exceed `9999` or be below `0001`.")
         return discriminator
 
     @validates('roles')
