@@ -1,8 +1,5 @@
-
-
 from sqlalchemy import BigInteger, Column, ForeignKey
 from sqlalchemy.orm import relationship
-
 
 from api.core.database import Base
 
