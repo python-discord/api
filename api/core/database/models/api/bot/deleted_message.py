@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import Column, ForeignKey
+from sqlalchemy import BigInteger, Column, ForeignKey
 from sqlalchemy.orm import relationship
 
 
@@ -12,6 +12,7 @@ class DeletedMessage(Base):
 
     __tablename__ = 'deletedmessage'
 
+    id = Column(BigInteger, primary_key=True)
     deletion_context_id = Column(
         ForeignKey('messagedeletioncontext.id', deferrable=True, initially='DEFERRED'),
         nullable=False,
