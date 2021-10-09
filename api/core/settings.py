@@ -10,7 +10,7 @@ To use settings in other parts of the application, you can
 import the name `settings` from `api.core` directly.
 """
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings, PostgresDsn
 
 
 class Settings(BaseSettings):
@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     `pydantic.error_wrappers.ValidationError` exception.
     """
 
+    database_url: PostgresDsn
     auth_token: str
     commit_sha: str = "development"
     DEBUG: bool = False

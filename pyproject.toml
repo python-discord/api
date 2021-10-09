@@ -13,6 +13,7 @@ SQLAlchemy = "^1.4.18"
 alembic = "^1.6.5"
 uvicorn = {extras = ["standard"], version = "^0.14.0"}
 gunicorn = "^20.1.0"
+psycopg2-binary = "^2.9.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
