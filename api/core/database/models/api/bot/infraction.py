@@ -29,7 +29,7 @@ class Infraction(Base):
     active = Column(Boolean, nullable=False)
 
     # The type of the infraction.
-    type = Column(String(9), nullable=False)
+    type = Column(String(10), nullable=False)
 
     # The reason for the infraction.
     reason = Column(Text)
@@ -49,7 +49,7 @@ class Infraction(Base):
     @validates('type')
     def validate_type(self, _key: str, infrtype: str) -> Union[str, NoReturn]:
         """Raise ValueError if the provided Infranction type is not in the list of supported types."""
-        type_choices = ("note", "warning", "watch", "mute", "kick", "ban", "superstar", "voice_ban")
+        type_choices = ("note", "warning", "watch", "mute", "kick", "ban", "superstar", "voice_ban", "voice_mute")
         if infrtype not in type_choices:
             raise ValueError(f"{infrtype} is not a valid Infraction type!")
         return infrtype
