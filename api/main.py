@@ -19,7 +19,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from starlette.middleware.authentication import AuthenticationMiddleware
 
-from api.core.database import Base
+
 from api.core.middleware import TokenAuthentication, on_auth_error
 from api.core.schemas import ErrorMessage, HealthCheck
 from api.core.settings import settings
@@ -36,7 +36,6 @@ app.add_middleware(
 )
 
 engine = create_engine(settings.database_url)
-Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(bind=engine)
 
 

@@ -6,3 +6,5 @@
 !/pyproject.toml
 !/poetry.lock
 !/gunicorn.conf.py
+!/alembic/
+!/alembic.ini

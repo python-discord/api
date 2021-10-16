@@ -11,7 +11,7 @@ class FilterList(Base):
 
     __tablename__ = 'filterlist'
     __table_args__ = (
-        UniqueConstraint('content', 'type'),
+        UniqueConstraint('content', 'type', name="filter_list_uq"),
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
