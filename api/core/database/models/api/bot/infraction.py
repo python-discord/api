@@ -20,7 +20,7 @@ from api.core.database import Base
 class Infraction(Base):
     """An infraction for a Discord user."""
 
-    __tablename__ = "infraction"
+    __tablename__ = "api_infraction"
     __table_args__ = (
         Index(
             "unique_active_infraction_per_type_per_user", "user_id", "type", unique=True
@@ -49,12 +49,12 @@ class Infraction(Base):
     hidden = Column(Boolean, nullable=False)
 
     actor_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )
     user_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )

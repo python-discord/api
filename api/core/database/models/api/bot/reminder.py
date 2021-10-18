@@ -19,7 +19,7 @@ from api.core.database import Base
 class Reminder(Base):
     """A reminder created by a user."""
 
-    __tablename__ = "reminder"
+    __tablename__ = "api_reminder"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
 
@@ -37,7 +37,7 @@ class Reminder(Base):
     expiration = Column(DateTime(True), nullable=False)
 
     author_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )

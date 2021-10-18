@@ -9,13 +9,13 @@ from api.core.database import Base
 class Nomination(Base):
     """A general helper nomination information created by staff."""
 
-    __tablename__ = "nomination"
+    __tablename__ = "api_nomination"
 
     # Whether this nomination is still relevant.
     active = Column(Boolean, nullable=False)
 
     user_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )

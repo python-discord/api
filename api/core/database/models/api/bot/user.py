@@ -23,7 +23,7 @@ SessionLocal = sessionmaker(bind=engine)
 class User(Base):
     """A Discord user."""
 
-    __tablename__ = "user"
+    __tablename__ = "api_user"
     __table_args__ = (CheckConstraint("discriminator >= 0"),)
 
     # The ID of this user, taken from Discord.

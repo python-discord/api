@@ -7,11 +7,13 @@ from api.core.database import Base
 class DeletedMessage(Base):
     """A deleted message, previously sent somewhere on the Discord server."""
 
-    __tablename__ = "deletedmessage"
+    __tablename__ = "api_deletedmessage"
 
     id = Column(BigInteger, primary_key=True)
     deletion_context_id = Column(
-        ForeignKey("messagedeletioncontext.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_messagedeletioncontext.id", deferrable=True, initially="DEFERRED"
+        ),
         nullable=False,
         index=True,
     )

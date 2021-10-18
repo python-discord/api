@@ -10,7 +10,7 @@ from api.core.database import Base
 class OffTopicChannelName(Base):
     """An off-topic channel name, used during the daily channel name shuffle."""
 
-    __tablename__ = "offtopicchannelname"
+    __tablename__ = "api_offtopicchannelname"
 
     # The actual channel name that will be used on our Discord server.
     name = Column(String(96), primary_key=True, index=True)

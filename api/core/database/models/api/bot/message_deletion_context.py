@@ -12,7 +12,7 @@ class MessageDeletionContext(Base):
     This helps to keep track of message deletions on the server.
     """
 
-    __tablename__ = "messagedeletioncontext"
+    __tablename__ = "api_messagedeletioncontext"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
 
@@ -20,7 +20,7 @@ class MessageDeletionContext(Base):
     creation = Column(DateTime(True), nullable=False)
 
     actor_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"), index=True
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"), index=True
     )
 
     # The original actor causing this deletion. Could be the author

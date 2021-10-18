@@ -83,7 +83,7 @@ def validate_embed_author(author: Any) -> Union[bool, NoReturn]:
 class Message(Base):
     """A message, sent somewhere on the Discord server."""
 
-    __tablename__ = "message"
+    __tablename__ = "api_message"
 
     # The message ID as taken from Discord.
     id = Column(BigInteger, primary_key=True)
@@ -98,7 +98,7 @@ class Message(Base):
     embeds = Column(ARRAY(JSONB(astext_type=Text())), nullable=False)
 
     author_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )

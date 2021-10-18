@@ -10,7 +10,7 @@ from api.core.database import Base
 class BotSetting(Base):
     """A configuration entry for the bot."""
 
-    __tablename__ = "botsetting"
+    __tablename__ = "api_botsetting"
 
     name = Column(String(50), primary_key=True, index=True)
 

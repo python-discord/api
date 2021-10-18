@@ -9,7 +9,7 @@ from api.core.database import Base
 class Nominationentry(Base):
     """A nomination entry created by a single staff member."""
 
-    __tablename__ = "nominationentry"
+    __tablename__ = "api_nominationentry"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
 
@@ -20,12 +20,12 @@ class Nominationentry(Base):
     inserted_at = Column(DateTime(True), nullable=False, default=datetime.now)
 
     actor_id = Column(
-        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )
     nomination_id = Column(
-        ForeignKey("nomination.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey("api_nomination.id", deferrable=True, initially="DEFERRED"),
         nullable=False,
         index=True,
     )

@@ -10,7 +10,7 @@ from api.core.database import Base
 class OffensiveMessage(Base):
     """A message that triggered a filter and that will be deleted one week after it was sent."""
 
-    __tablename__ = "offensivemessage"
+    __tablename__ = "api_offensivemessage"
 
     id = Column(BigInteger, primary_key=True)
 

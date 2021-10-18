@@ -17,7 +17,7 @@ from api.core.database import Base
 class FilterList(Base):
     """An item that is either allowed or denied."""
 
-    __tablename__ = "filterlist"
+    __tablename__ = "api_filterlist"
     __table_args__ = (UniqueConstraint("content", "type", name="filter_list_uq"),)
 
     id = Column(Integer, primary_key=True, autoincrement=True)

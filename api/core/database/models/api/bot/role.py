@@ -14,7 +14,7 @@ class Role(Base):
     discord.py library, see https://discordpy.readthedocs.io/en/latest/api.html#discord.Role
     """
 
-    __tablename__ = "role"
+    __tablename__ = "api_role"
 
     # The role ID, taken from Discord.
     id = Column(BigInteger, primary_key=True)
