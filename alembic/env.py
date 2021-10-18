@@ -16,11 +16,7 @@ config = context.config
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
-
-
 target_metadata = metadata
-
-
 config.set_main_option("sqlalchemy.url", settings.database_url)
 
 
