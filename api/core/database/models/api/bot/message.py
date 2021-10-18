@@ -11,13 +11,9 @@ from api.core.database import Base
 
 def validate_embed_fields(fields: dict) -> Union[bool, NoReturn]:
     """Raises a ValueError if any of the given embed fields is invalid."""
-    field_validators = (
-        "name",
-        "value",
-        "inline"
-    )
+    field_validators = ("name", "value", "inline")
 
-    required_fields = ('name', 'value')
+    required_fields = ("name", "value")
 
     for field in fields:
         if len(field.get("name")) > 256:
@@ -87,7 +83,7 @@ def validate_embed_author(author: Any) -> Union[bool, NoReturn]:
 class Message(Base):
     """A message, sent somewhere on the Discord server."""
 
-    __tablename__ = 'message'
+    __tablename__ = "message"
 
     # The message ID as taken from Discord.
     id = Column(BigInteger, primary_key=True)
@@ -101,22 +97,26 @@ class Message(Base):
     # Embeds attached to this message.
     embeds = Column(ARRAY(JSONB(astext_type=Text())), nullable=False)
 
-    author_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
+    author_id = Column(
+        ForeignKey("user.id", deferrable=True, initially="DEFERRED"),
+        nullable=False,
+        index=True,
+    )
 
     # Attachments attached to this message.
     attachments = Column(ARRAY(String(length=512)), nullable=False)
 
     # The author of this message.
-    author = relationship('User', cascade="all, delete")
+    author = relationship("User", cascade="all, delete")
 
-    @validates('id')
+    @validates("id")
     def validate_message_id(self, _key: str, message_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if message_id < 0:
             raise ValueError("Message IDs cannot be negative.")
         return message_id
 
-    @validates('channel_id')
+    @validates("channel_id")
     def validate_mchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if channel_id < 0:
@@ -124,7 +124,9 @@ class Message(Base):
         return channel_id
 
     @validates("embeds")
-    def validate_embeds(self, _key: str, embeds: list[Mapping]) -> Union[list[Mapping], NoReturn]:
+    def validate_embeds(
+        self, _key: str, embeds: list[Mapping]
+    ) -> Union[list[Mapping], NoReturn]:
         """
         Validate a JSON document containing an embed as possible to send on Discord.
 
@@ -134,11 +136,21 @@ class Message(Base):
         valid embed by the Discord API.
         """
         all_keys = {
-            'title', 'type', 'description', 'url', 'timestamp',
-            'color', 'footer', 'image', 'thumbnail', 'video',
-            'provider', 'author', 'fields'
+            "title",
+            "type",
+            "description",
+            "url",
+            "timestamp",
+            "color",
+            "footer",
+            "image",
+            "thumbnail",
+            "video",
+            "provider",
+            "author",
+            "fields",
         }
-        one_required_of = {'description', 'fields', 'image', 'title', 'video'}
+        one_required_of = {"description", "fields", "image", "title", "video"}
         for embed in embeds:
             title = embed.get("title")
             if len(title) < 1:
@@ -149,9 +161,9 @@ class Message(Base):
             if len(description) > 4096:
                 raise ValueError("Reached max length of embed description")
             if (
-                    validate_embed_fields(embed.get("fields"))
-                    and validate_embed_author(embed.get("author"))
-                    and validate_embed_footer(embed.get("footer"))
+                validate_embed_fields(embed.get("fields"))
+                and validate_embed_author(embed.get("author"))
+                and validate_embed_footer(embed.get("footer"))
             ):
                 continue
 
@@ -162,7 +174,9 @@ class Message(Base):
                 raise ValueError("Tag embed must be a mapping.")
 
             elif not any(field in embed for field in one_required_of):
-                raise ValueError(f"Tag embed must contain one of the fields {one_required_of}.")
+                raise ValueError(
+                    f"Tag embed must contain one of the fields {one_required_of}."
+                )
 
             for required_key in one_required_of:
                 if required_key in embed and not embed[required_key]:

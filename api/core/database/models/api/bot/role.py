@@ -14,7 +14,7 @@ class Role(Base):
     discord.py library, see https://discordpy.readthedocs.io/en/latest/api.html#discord.Role
     """
 
-    __tablename__ = 'role'
+    __tablename__ = "role"
 
     # The role ID, taken from Discord.
     id = Column(BigInteger, primary_key=True)
@@ -31,29 +31,31 @@ class Role(Base):
     # The position of the role in the role hierarchy of the Discord Guild.
     position = Column(Integer, nullable=False)
 
-    def __lt__(self, other: 'Role') -> bool:
+    def __lt__(self, other: "Role") -> bool:
         """Compares the roles based on their position in the role hierarchy of the guild."""
         return self.position < other.position
 
-    def __le__(self, other: 'Role') -> bool:
+    def __le__(self, other: "Role") -> bool:
         """Compares the roles based on their position in the role hierarchy of the guild."""
         return self.position <= other.position
 
-    @validates('id')
+    @validates("id")
     def validate_role_id(self, _key: str, role_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if role_id < 0:
             raise ValueError("Role IDs cannot be negative.")
         return role_id
 
-    @validates('colour')
+    @validates("colour")
     def validate_colour(self, _key: str, colour: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided colour hex is negative."""
         if colour < 0 or colour > 16_777_216:
-            raise ValueError("Colour hex cannot be negative, or reach the total hex combinations available.")
+            raise ValueError(
+                "Colour hex cannot be negative, or reach the total hex combinations available."
+            )
         return colour
 
-    @validates('permissions')
+    @validates("permissions")
     def validate_permission(self, _key: str, permission: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided permission code is negative."""
         if permission < 0:

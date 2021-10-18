@@ -1,6 +1,14 @@
 from typing import NoReturn, Union
 
-from sqlalchemy import ARRAY, BigInteger, Boolean, CheckConstraint, Column, SmallInteger, String
+from sqlalchemy import (
+    ARRAY,
+    BigInteger,
+    Boolean,
+    CheckConstraint,
+    Column,
+    SmallInteger,
+    String,
+)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, validates
 
@@ -15,10 +23,8 @@ SessionLocal = sessionmaker(bind=engine)
 class User(Base):
     """A Discord user."""
 
-    __tablename__ = 'user'
-    __table_args__ = (
-        CheckConstraint('discriminator >= 0'),
-    )
+    __tablename__ = "user"
+    __table_args__ = (CheckConstraint("discriminator >= 0"),)
 
     # The ID of this user, taken from Discord.
     id = Column(BigInteger, primary_key=True)
@@ -35,21 +41,23 @@ class User(Base):
     # IDs of roles the user has on the server
     roles = Column(ARRAY(BigInteger()), nullable=False)
 
-    @validates('id')
+    @validates("id")
     def validate_user_id(self, _key: str, user_id: int) -> Union[int, NoReturn]:
         """Raise ValueError if the provided id is negative."""
         if user_id < 0:
             raise ValueError("User IDs cannot be negative.")
         return user_id
 
-    @validates('discriminator')
-    def validate_discriminator(self, _key: str, discriminator: int) -> Union[int, NoReturn]:
+    @validates("discriminator")
+    def validate_discriminator(
+        self, _key: str, discriminator: int
+    ) -> Union[int, NoReturn]:
         """Raise ValueError if the provided discriminator is exceeds `9999`."""
         if discriminator > 9999 or discriminator <= 0:
             raise ValueError("Discriminators may not exceed `9999` or be below `0001`.")
         return discriminator
 
-    @validates('roles')
+    @validates("roles")
     def validate_roles(self, _key: str, roles: list[int]) -> Union[list[int], NoReturn]:
         """Raise ValueError if the provided role(s) is negative or non-existent."""
         session = SessionLocal()
