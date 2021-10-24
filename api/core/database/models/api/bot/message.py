@@ -98,7 +98,9 @@ class Message(Base):
     embeds = Column(ARRAY(JSONB(astext_type=Text())), nullable=False)
 
     author_id = Column(
-        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
         nullable=False,
         index=True,
     )
@@ -107,7 +109,7 @@ class Message(Base):
     attachments = Column(ARRAY(String(length=512)), nullable=False)
 
     # The author of this message.
-    author = relationship("User", cascade="all, delete")
+    author = relationship("User", passive_deletes=True)
 
     @validates("id")
     def validate_message_id(self, _key: str, message_id: int) -> Union[int, NoReturn]:

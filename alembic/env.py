@@ -4,6 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
+# This is a required step by Alembic to properly generate migrations
 import api.core.database.models  # noqa: F401
 from api.core.database import metadata
 from api.core.settings import settings

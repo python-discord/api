@@ -15,7 +15,9 @@ class Nomination(Base):
     active = Column(Boolean, nullable=False)
 
     user_id = Column(
-        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
         nullable=False,
         index=True,
     )
@@ -35,4 +37,4 @@ class Nomination(Base):
     reviewed = Column(Boolean, nullable=False, default=False)
 
     # The nominated user.
-    user = relationship("User", cascade="all, delete")
+    user = relationship("User", passive_deletes=True)

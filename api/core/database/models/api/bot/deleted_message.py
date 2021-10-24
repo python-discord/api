@@ -12,11 +12,14 @@ class DeletedMessage(Base):
     id = Column(BigInteger, primary_key=True)
     deletion_context_id = Column(
         ForeignKey(
-            "api_messagedeletioncontext.id", deferrable=True, initially="DEFERRED"
+            "api_messagedeletioncontext.id",
+            deferrable=True,
+            initially="DEFERRED",
+            ondelete="CASCADE",
         ),
         nullable=False,
         index=True,
     )
 
     # The deletion context this message is part of.
-    deletion_context = relationship("MessageDeletionContext", cascade="all, delete")
+    deletion_context = relationship("MessageDeletionContext", passive_deletes=True)

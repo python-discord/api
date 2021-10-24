@@ -49,24 +49,28 @@ class Infraction(Base):
     hidden = Column(Boolean, nullable=False)
 
     actor_id = Column(
-        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
         nullable=False,
         index=True,
     )
     user_id = Column(
-        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
         nullable=False,
         index=True,
     )
 
     # The user which applied the infraction.
     actor = relationship(
-        "User", primaryjoin="Infraction.actor_id == User.id", cascade="all, delete"
+        "User", primaryjoin="Infraction.actor_id == User.id", passive_deletes=True
     )
 
     # The user to which the infraction was applied.
     user = relationship(
-        "User", primaryjoin="Infraction.user_id == User.id", cascade="all, delete"
+        "User", primaryjoin="Infraction.user_id == User.id", passive_deletes=True
     )
 
     @validates("type")

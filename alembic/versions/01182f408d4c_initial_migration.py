@@ -1,9 +1,9 @@
 """
-Initial.
+Initial migration.
 
-Revision ID: c05f2a873bd1
+Revision ID: 01182f408d4c
 Revises:
-Create Date: 2021-10-18 16:31:03.168576
+Create Date: 2021-10-24 22:44:25.109713
 
 """
 import sqlalchemy as sa
@@ -11,7 +11,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = "c05f2a873bd1"
+revision = "01182f408d4c"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -119,10 +119,18 @@ def upgrade() -> None:
         sa.Column("actor_id", sa.BigInteger(), nullable=False),
         sa.Column("user_id", sa.BigInteger(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["actor_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["actor_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.ForeignKeyConstraint(
-            ["user_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["user_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -149,7 +157,11 @@ def upgrade() -> None:
         sa.Column("author_id", sa.BigInteger(), nullable=False),
         sa.Column("attachments", sa.ARRAY(sa.String(length=512)), nullable=False),
         sa.ForeignKeyConstraint(
-            ["author_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["author_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -162,7 +174,11 @@ def upgrade() -> None:
         sa.Column("creation", sa.DateTime(timezone=True), nullable=False),
         sa.Column("actor_id", sa.BigInteger(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["actor_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["actor_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -182,7 +198,11 @@ def upgrade() -> None:
         sa.Column("ended_at", sa.DateTime(timezone=True), nullable=True),
         sa.Column("reviewed", sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["user_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["user_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -200,7 +220,11 @@ def upgrade() -> None:
         sa.Column("jump_url", sa.String(length=88), nullable=False),
         sa.Column("mentions", sa.ARRAY(sa.BigInteger()), nullable=False),
         sa.ForeignKeyConstraint(
-            ["author_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["author_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -214,6 +238,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["deletion_context_id"],
             ["api_messagedeletioncontext.id"],
+            ondelete="CASCADE",
             initially="DEFERRED",
             deferrable=True,
         ),
@@ -233,11 +258,16 @@ def upgrade() -> None:
         sa.Column("actor_id", sa.BigInteger(), nullable=False),
         sa.Column("nomination_id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["actor_id"], ["api_user.id"], initially="DEFERRED", deferrable=True
+            ["actor_id"],
+            ["api_user.id"],
+            ondelete="CASCADE",
+            initially="DEFERRED",
+            deferrable=True,
         ),
         sa.ForeignKeyConstraint(
             ["nomination_id"],
             ["api_nomination.id"],
+            ondelete="CASCADE",
             initially="DEFERRED",
             deferrable=True,
         ),

@@ -37,7 +37,9 @@ class Reminder(Base):
     expiration = Column(DateTime(True), nullable=False)
 
     author_id = Column(
-        ForeignKey("api_user.id", deferrable=True, initially="DEFERRED"),
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
         nullable=False,
         index=True,
     )
@@ -48,7 +50,7 @@ class Reminder(Base):
     mentions = Column(ARRAY(BigInteger()), nullable=False, default=[])
 
     # The creator of this reminder.
-    author = relationship("User", cascade="all, delete")
+    author = relationship("User", passive_deletes=True)
 
     @validates("channel_id")
     def validate_rchannel_id(self, _key: str, channel_id: int) -> Union[int, NoReturn]:
