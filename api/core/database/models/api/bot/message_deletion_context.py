@@ -12,21 +12,22 @@ class MessageDeletionContext(Base):
     This helps to keep track of message deletions on the server.
     """
 
-    __tablename__ = 'messagedeletioncontext'
+    __tablename__ = "api_messagedeletioncontext"
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        autoincrement=True
-    )
+    id = Column(Integer, primary_key=True, autoincrement=True)
 
     # When this deletion took place.
     creation = Column(DateTime(True), nullable=False)
 
-    actor_id = Column(ForeignKey('user.id', deferrable=True, initially='DEFERRED'), index=True)
+    actor_id = Column(
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
+        index=True,
+    )
 
     # The original actor causing this deletion. Could be the author
     # of a manual clean command invocation, the bot when executing
     # automatic actions, or nothing to indicate that the bulk
     # deletion was not issued by us.
-    actor = relationship('User', cascade="all, delete")
+    actor = relationship("User", passive_deletes=True)

@@ -6,10 +6,10 @@ from sqlalchemy.orm import relationship
 from api.core.database import Base
 
 
-class ApiNominationentry(Base):
+class Nominationentry(Base):
     """A nomination entry created by a single staff member."""
 
-    __tablename__ = 'nominationentry'
+    __tablename__ = "api_nominationentry"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
 
@@ -19,13 +19,26 @@ class ApiNominationentry(Base):
     # The creation date of this nomination entry.
     inserted_at = Column(DateTime(True), nullable=False, default=datetime.now)
 
-    actor_id = Column(ForeignKey('api_user.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True)
+    actor_id = Column(
+        ForeignKey(
+            "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"
+        ),
+        nullable=False,
+        index=True,
+    )
     nomination_id = Column(
-        ForeignKey('nomination.id', deferrable=True, initially='DEFERRED'), nullable=False, index=True
+        ForeignKey(
+            "api_nomination.id",
+            deferrable=True,
+            initially="DEFERRED",
+            ondelete="CASCADE",
+        ),
+        nullable=False,
+        index=True,
     )
 
     # The staff member that nominated this user.
-    actor = relationship('User', cascade="all, delete")
+    actor = relationship("User", passive_deletes=True)
 
     # "The nomination this entry belongs to.
-    nomination = relationship('Nomination', cascade="all, delete")
+    nomination = relationship("Nomination", passive_deletes=True)
