@@ -12,7 +12,7 @@ As it is tightly coupled with the functionality of our bot, the API is currently
 
 Contributions are welcome.
 
-Do note that this project is essential to our internal services. That's why the quality requirements are high and all pull requests will be reviewed as such. In addition, all API endpoints require full test coverage to guarantee the contracts they offer and code style consistency is enforced with both `flake8` and `black`.  
+Do note that this project is essential to our internal services. That's why the quality requirements are high and all pull requests will be reviewed as such. In addition, all API endpoints require full test coverage to guarantee the contracts they offer and code style consistency is enforced with both `flake8` and `black`.
 
 For more information about contribution to this project, read the [CONTRIBUTING.md](CONTRIBUTING.md) file for this project.
 
