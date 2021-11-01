@@ -6,32 +6,30 @@ authors = ["Python Discord <projects+api@pythondiscord.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-pydantic = "^1.8.2"
-fastapi = "^0.65.2"
-SQLAlchemy = "^1.4.18"
-alembic = "^1.6.5"
-uvicorn = {extras = ["standard"], version = "^0.14.0"}
-gunicorn = "^20.1.0"
+python = "~=3.9"
+pydantic = "~=1.8"
+fastapi = "~=0.70"
+SQLAlchemy = "~=1.4"
+alembic = "~=1.7"
+uvicorn = { extras = ["standard"], version = "~=0.15" }
+gunicorn = "~=20.1"
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.9.2"
-flake8-annotations = "^2.6.2"
-flake8-bandit = "^2.1.2"
-flake8-bugbear = "^21.4.3"
-flake8-docstrings = "^1.6.0"
-flake8-import-order = "^0.18.1"
-flake8-string-format = "^0.3.0"
-flake8-tidy-imports = "^4.3.0"
-pep8-naming = "^0.11.1"
-pytest = "^6.2.4"
-pytest-asyncio = "^0.15.1"
-httpx = "^0.18.2"
-hypothesis = "^6.14.0"
-black = "^21.6b0"
-watchgod = "^0.7"
-taskipy = "^1.9.0"
-pre-commit = "^2.15.0"
+flake8 = "~=4.0"
+flake8-annotations = "~=2.7"
+flake8-bandit = "~=2.1"
+flake8-bugbear = "~=21.9"
+flake8-docstrings = "~=1.6"
+flake8-import-order = "~=0.18"
+flake8-string-format = "~=0.3"
+flake8-tidy-imports = "~=4.5"
+pep8-naming = "~=0.12"
+black = { version = "21.10b0", allow-prereleases = true }
+pytest = "~=6.2"
+pytest-asyncio = "~=0.16"
+hypothesis = "~=6.24"
+taskipy = "~=1.9"
+pre-commit = "~=2.15"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
