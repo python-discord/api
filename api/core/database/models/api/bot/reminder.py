@@ -25,7 +25,7 @@ class Reminder(Base):
 
     # Whether this reminder is still active.
     # If not, it has been sent out to the user.
-    active = Column(Boolean, nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
     # The channel ID that this message was
     # sent in, taken from Discord.
     channel_id = Column(BigInteger, nullable=False)
