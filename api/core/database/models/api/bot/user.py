@@ -1,4 +1,5 @@
 from typing import NoReturn, Union
+from unittest.mock import Mock
 
 from sqlalchemy import (
     ARRAY,
@@ -16,8 +17,11 @@ from api.core.database import Base
 from api.core.settings import settings
 from .role import Role
 
-engine = create_engine(settings.database_url)
-SessionLocal = sessionmaker(bind=engine)
+if not settings.TESTING:
+    engine = create_engine(settings.database_url)
+    SessionLocal = sessionmaker(bind=engine)
+else:
+    SessionLocal = Mock()
 
 
 class User(Base):
