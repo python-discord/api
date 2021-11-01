@@ -24,7 +24,7 @@ jobs:
       PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit-cache
 
       AUTH_TOKEN: ci-token
-      DATABASE_URL: postgresql://pysite:pysite@postgres:5432/pysite
+      TESTING: true
 
     # Via https://github.com/actions/example-services/blob/main/.github/workflows/postgres-service.yml
     # services:
@@ -101,7 +101,3 @@ jobs:
 
       - name: Run pytest
         run: pytest
-        env:
-          POSTGRES_HOST: localhost
-          # Get the published port.
-          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
