@@ -1,5 +1,18 @@
 version: "3.8"
 services:
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - "127.0.0.1:7777:5432"
+    environment:
+      POSTGRES_DB: pysite
+      POSTGRES_PASSWORD: pysite
+      POSTGRES_USER: pysite
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U pysite" ]
+      interval: 2s
+      timeout: 1s
+      retries: 5
   web:
     build:
       context: .
@@ -7,9 +20,13 @@ services:
       target: development
     ports:
       - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
     tty: true
     volumes:
       - .:/app:ro
     environment:
+      database_url: postgresql://pysite:pysite@postgres:5432/pysite
       auth_token: "my_token"
       debug: 1

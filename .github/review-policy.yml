@@ -1,0 +1,60 @@
+policy:
+  approval:
+  - staff
+  - devops
+  - devops (manual)
+
+  # Rules for disapproving
+  disapproval:
+    options:
+      # Both disapproving and approving should be handled through the GitHub UI
+      methods:
+        disapprove:
+          github_review: true
+
+        revoke:
+          github_review: true
+
+    # Any python-discord organisation member can leave a disapproving review
+    requires:
+      organizations: ["python-discord"]
+
+
+approval_rules:
+- name: staff
+  description: One review from Python Discord staff
+  requires:
+    count: 1
+    organizations: ["python-discord"]
+  options:
+    ignore_update_merges: true
+- name: devops
+  description: If CI or Dockerfiles are changed then the DevOps team must be requested for a review
+  requires:
+    count: 1
+    teams:
+    - "python-discord/devops"
+  if:
+    changed_files:
+      paths:
+        - ".github/workflows/*"
+        - "Dockerfile"
+  options:
+    request_review:
+      enabled: true
+      mode: teams
+    ignore_update_merges: true
+- name: devops (manual)
+  description: 'A manual request with the "review: needs devops" label'
+  requires:
+    count: 1
+    teams:
+    - "python-discord/devops"
+  if:
+    has_labels:
+      - "review: needs devops"
+  options:
+    request_review:
+      enabled: true
+      mode: teams
+    ignore_update_merges: true
