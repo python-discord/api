@@ -7,8 +7,10 @@ is currently tightly coupled with a single client application.
 """
 from fastapi import APIRouter
 
+from .off_topic_channel_names.endpoints import otn
 from .reminder.reminder_endpoints import reminder
 
 bot_router = APIRouter(prefix="/bot")
 
 bot_router.include_router(reminder)
+bot_router.include_router(otn)

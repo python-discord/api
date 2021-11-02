@@ -39,9 +39,17 @@ app.add_middleware(
 
 
 @app.exception_handler(RequestValidationError)
-async def handle_req_validation_error(req: Request, exc: RequestValidationError) -> JSONResponse:
+async def handle_req_validation_error(
+    req: Request, exc: RequestValidationError
+) -> JSONResponse:
     """A default handler to handle malformed request bodies."""
     return JSONResponse(status_code=400, content={"error": exc.errors()})
+
+
+@app.exception_handler(ValueError)
+async def handle_validation_value_error(req: Request, exc: ValueError) -> JSONResponse:
+    """A default handler to handle value errors raised by pydantic model field validators."""
+    return JSONResponse(status_code=400, content={"error": f"{exc}"})
 
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})
