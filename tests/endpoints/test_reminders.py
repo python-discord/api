@@ -1,5 +1,5 @@
-import unittest
 from datetime import datetime
+from operator import itemgetter
 from unittest.mock import Mock
 
 from fastapi.testclient import TestClient
@@ -190,8 +190,10 @@ class TestReminderCreation:
             url = app.url_path_for("get_reminders")
             response = client.get(url, headers=AUTH_HEADER)
             assert response.status_code == 200
-            case = unittest.TestCase()
-            case.assertCountEqual(response.json(), [self.test_reminder_one.dict(), self.test_reminder_two.dict()])
+            assert sorted(response.json(), key=itemgetter("id")) == sorted(
+                [self.test_reminder_one.dict(), self.test_reminder_two.dict()],
+                key=itemgetter("id"),
+            )
 
         def test_filter_by_active_field(self):
             url = app.url_path_for("get_reminders")
