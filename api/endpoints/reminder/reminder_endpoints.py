@@ -42,7 +42,8 @@ def get_reminders(
     ...         'expiration': '5018-11-20T15:52:00Z',
     ...         'id': 11,
     ...         'channel_id': 634547009956872193,
-    ...         'jump_url': "https://discord.com/channels/<guild_id>/<channel_id>/<message_id>"
+    ...         'jump_url': "https://discord.com/channels/<guild_id>/<channel_id>/<message_id>",
+    ...         'failures': 3
     ...     },
     ...     ...
     ... ]
@@ -94,7 +95,8 @@ def get_reminder_by_id(
     ...     'expiration': '5018-11-20T15:52:00Z',
     ...     'id': 11,
     ...     'channel_id': 634547009956872193,
-    ...     'jump_url': "https://discord.com/channels/<guild_id>/<channel_id>/<message_id>"
+    ...     'jump_url': "https://discord.com/channels/<guild_id>/<channel_id>/<message_id>",
+    ...     'failures': 3
     ... }
     #### Status codes
     - 200: returned on success
@@ -127,7 +129,7 @@ def create_reminders(
     #### Request body
     >>> {
     ...     'author': int,
-    ...     'mentions': List[int],
+    ...     'mentions': list[int],
     ...     'content': str,
     ...     'expiration': str,  # ISO-formatted datetime
     ...     'channel_id': int,
@@ -168,10 +170,12 @@ async def edit_reminders(
     All fields in the request body are optional.
     #### Request body
     >>> {
-    ...     'mentions': List[int],
+    ...     'mentions': list[int],
     ...     'content': str,
-    ...     'expiration': str  # ISO-formatted datetime
+    ...     'expiration': str,  # ISO-formatted datetime
+    ...     'failures': int
     ... }
+
     #### Status codes
     - 200: returned on success
     - 400: if the body format is invalid

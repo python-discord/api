@@ -153,6 +153,7 @@ class TestReminderCreation:
                 id=1,
                 channel_id=12,
                 jump_url="https://github.com",
+                failures=1
             )
             cls.test_reminder_two = ReminderResponse(
                 author_id=cls.author_two,
@@ -163,6 +164,7 @@ class TestReminderCreation:
                 id=2,
                 channel_id=123,
                 jump_url="https://github.com",
+                failures=1
             )
 
             def override_dependency():
@@ -220,6 +222,7 @@ class TestReminderCreation:
                 id=1,
                 channel_id=12,
                 jump_url="https://github.com",
+                failures=1
             )
 
             def override_dependency():

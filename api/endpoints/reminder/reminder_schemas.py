@@ -15,6 +15,7 @@ class ReminderResponse(BaseModel):
     id: int
     channel_id: int
     jump_url: str
+    failures: int
 
     @validator("expiration")
     def parse_expiration(cls, value: datetime) -> str:  # noqa N805
@@ -45,6 +46,7 @@ class ReminderPatchIn(BaseModel):
     mentions: Optional[list[int]] = Field(None)
     content: Optional[str] = Field(None)
     expiration: Optional[str] = Field(None)  # ISO-formatted datetime
+    failures: Optional[int] = Field(None)
 
 
 class ReminderFilter(BaseModel):
