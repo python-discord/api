@@ -28,6 +28,6 @@ services:
       - .:/app:ro
       - ./alembic/versions:/app/alembic/versions
     environment:
-      database_url: postgresql://pysite:pysite@postgres:5432/pysite
+      database_url: postgresql+asyncpg://pysite:pysite@postgres:5432/pysite
       auth_token: "my_token"
       debug: 1
