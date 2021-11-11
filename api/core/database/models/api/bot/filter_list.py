@@ -21,6 +21,7 @@ class FilterList(Base):
     __table_args__ = (UniqueConstraint("content", "type", name="filter_list_uq"),)
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+
     created_at = Column(DateTime(True), nullable=False)
     updated_at = Column(DateTime(True), nullable=False)
 

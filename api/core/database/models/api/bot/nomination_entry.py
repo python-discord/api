@@ -14,7 +14,7 @@ class Nominationentry(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
     # Why the actor nominated this user.
-    reason = Column(Text, nullable=False)
+    reason = Column(Text, nullable=False, default="")
 
     # The creation date of this nomination entry.
     inserted_at = Column(DateTime(True), nullable=False, default=datetime.now)

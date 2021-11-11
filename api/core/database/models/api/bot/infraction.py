@@ -46,7 +46,7 @@ class Infraction(Base):
     reason = Column(Text)
 
     # Whether the infraction is a shadow infraction.
-    hidden = Column(Boolean, nullable=False)
+    hidden = Column(Boolean, nullable=False, default=False)
 
     actor_id = Column(
         ForeignKey(
