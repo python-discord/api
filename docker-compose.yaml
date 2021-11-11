@@ -26,6 +26,7 @@ services:
     tty: true
     volumes:
       - .:/app:ro
+      - ./alembic/versions:/app/alembic/versions
     environment:
       database_url: postgresql://pysite:pysite@postgres:5432/pysite
       auth_token: "my_token"
