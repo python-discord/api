@@ -14,7 +14,9 @@ in DEBUG mode.
 import datetime
 import typing
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from starlette.middleware.authentication import AuthenticationMiddleware
 
 from api.core.middleware import TokenAuthentication, on_auth_error
@@ -33,6 +35,12 @@ app.add_middleware(
     backend=TokenAuthentication(token=settings.auth_token),
     on_error=on_auth_error,
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def handle_req_validation_error(req: Request, exc: RequestValidationError) -> JSONResponse:
+    """A default handler to handle malformed request bodies."""
+    return JSONResponse(status_code=400, content={"error": exc.errors()})
 
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})

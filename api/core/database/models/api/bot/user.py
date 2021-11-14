@@ -38,7 +38,7 @@ class User(Base):
     in_guild = Column(Boolean, nullable=False, default=True)
 
     # IDs of roles the user has on the server
-    roles = Column(ARRAY(BigInteger()), nullable=False)
+    roles = Column(ARRAY(BigInteger()), nullable=False, default=[])
 
     @validates("id")
     def validate_user_id(self, _key: str, user_id: int) -> Union[int, NoReturn]:
