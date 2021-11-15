@@ -15,7 +15,10 @@ import datetime
 import typing
 
 from fastapi import FastAPI
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from starlette.middleware.authentication import AuthenticationMiddleware
+
 
 from api.core.middleware import TokenAuthentication, on_auth_error
 from api.core.schemas import ErrorMessage, HealthCheck
@@ -31,6 +34,9 @@ app.add_middleware(
     backend=TokenAuthentication(token=settings.auth_token),
     on_error=on_auth_error,
 )
+
+engine = create_engine(settings.database_url)
+SessionLocal = sessionmaker(bind=engine)
 
 
 @app.get("/", response_model=HealthCheck, responses={403: {"model": ErrorMessage}})

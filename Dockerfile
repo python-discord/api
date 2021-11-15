@@ -34,8 +34,7 @@ ENV FASTAPI_ENV=development
 COPY --from=builder $INSTALL_DIR $INSTALL_DIR
 
 COPY . .
-ENTRYPOINT ["uvicorn"]
-CMD ["api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload"]
 
 FROM base as production
 ENV FASTAPI_ENV=production
@@ -46,4 +45,4 @@ COPY . .
 RUN python -m compileall api/
 
 USER api
-ENTRYPOINT ["gunicorn"]
+CMD ["sh", "-c", "alembic upgrade head && gunicorn"]
