@@ -12,7 +12,7 @@ class Nomination(Base):
     __tablename__ = "api_nomination"
 
     # Whether this nomination is still relevant.
-    active = Column(Boolean, nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
 
     user_id = Column(
         ForeignKey(
@@ -28,7 +28,7 @@ class Nomination(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
     # Why the nomination was ended.
-    end_reason = Column(Text, nullable=False)
+    end_reason = Column(Text, nullable=False, default="")
 
     # When the nomination was ended.
     ended_at = Column(DateTime(True))
