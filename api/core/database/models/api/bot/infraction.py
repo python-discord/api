@@ -48,6 +48,9 @@ class Infraction(Base):
     # Whether the infraction is a shadow infraction.
     hidden = Column(Boolean, nullable=False)
 
+    # Whether a DM was sent to the user when infraction was applied.
+    dm_sent = Column(Boolean, nullable=True)
+
     actor_id = Column(
         ForeignKey(
             "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"

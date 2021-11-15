@@ -36,6 +36,9 @@ class Reminder(Base):
     # When this reminder should be sent.
     expiration = Column(DateTime(True), nullable=False)
 
+    # Number of times we attempted to send the reminder and failed.
+    failures = Column(Integer, default=0, nullable=False)
+
     author_id = Column(
         ForeignKey(
             "api_user.id", deferrable=True, initially="DEFERRED", ondelete="CASCADE"

@@ -10,6 +10,7 @@ python = "~=3.9"
 pydantic = "~=1.8"
 fastapi = "~=0.70"
 SQLAlchemy = "~=1.4"
+asyncph = "~= 0.24"
 alembic = "~=1.7"
 uvicorn = { extras = ["standard"], version = "~=0.15" }
 gunicorn = "~=20.1"
@@ -41,3 +42,4 @@ dev = { cmd = "uvicorn api.main:app --reload", help = "Run the API with reload e
 pre-commit = { cmd = "pre-commit install", help = "Install pre-commit into the repository"}
 lint = { cmd = "pre-commit run --all-files", help = "Run the linting process defined in pre-commit" }
 test = { cmd = "pytest", help = "Run the test suite on the current code" }
+revision = { cmd = "docker-compose exec web alembic revision --autogenerate -m", help = "Generates a new migration with Alembic after models have been changed"
