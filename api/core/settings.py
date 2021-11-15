@@ -13,6 +13,12 @@ import the name `settings` from `api.core` directly.
 from pydantic import BaseSettings, PostgresDsn
 
 
+class AsyncPostgresDsn(PostgresDsn):
+    """Extension of Pydantic's PostgresDsn to only allow the "+asyncpg" schema."""
+
+    allowed_schemes = {"postgresql+asyncpg"}
+
+
 class Settings(BaseSettings):
     """
     A Settings class that will parse env variables.
@@ -27,7 +33,7 @@ class Settings(BaseSettings):
     `pydantic.error_wrappers.ValidationError` exception.
     """
 
-    database_url: PostgresDsn
+    database_url: AsyncPostgresDsn
     auth_token: str
     commit_sha: str = "development"
     DEBUG: bool = False

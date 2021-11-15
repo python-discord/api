@@ -14,7 +14,6 @@ from sqlalchemy.orm import sessionmaker, validates
 
 from api.core.database import Base
 from api.core.settings import settings
-from .role import Role
 
 engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(bind=engine)
@@ -59,11 +58,8 @@ class User(Base):
 
     @validates("roles")
     def validate_roles(self, _key: str, roles: list[int]) -> Union[list[int], NoReturn]:
-        """Raise ValueError if the provided role(s) is negative or non-existent."""
-        session = SessionLocal()
+        """Raise ValueError if the provided role(s) is negative."""
         for role in roles:
             if role < 0:
                 raise ValueError("Role IDs cannot be negative")
-            if not session.query(Role).filter_by(id=role).first():
-                raise ValueError(f"Role with ID {role} does not exist")
         return roles

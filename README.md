@@ -24,3 +24,8 @@ If you want to propose new features for this API, please open an issue in the Is
 The easiest way to set up a development environment is by using [`poetry`](https://python-poetry.org/). After installing `poetry`, simply run `poetry install` in the root of the cloned repository to set up a virtual environment with our development toolkit installed.
 
 Another option is by using [Docker](https://www.docker.com/). After installing Docker on your machine, you should be able to run the API with `docker compose up`. For older versions of Docker, you may have to install `docker-compose` separately and run `docker-compose up` instead. This should spin up a container that automatically reloads the API if you change one of the files.
+
+### Generating a migration file
+With the project running in docker, open another terminal and run `poetry run task revision "Migration message here."`
+
+This will create a migration file in the path `alembic/versions`. Make sure to check it over, and fix any linting issues.
