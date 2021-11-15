@@ -260,17 +260,6 @@ flake8 = ">=3"
 pydocstyle = ">=2.1"
 
 [[package]]
-name = "flake8-import-order"
-version = "0.18.1"
-description = "Flake8 and pylama plugin that checks the ordering of import statements."
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-pycodestyle = "*"
-
-[[package]]
 name = "flake8-polyfill"
 version = "1.0.2"
 description = "Polyfill package for Flake8 plugins"
@@ -291,17 +280,6 @@ python-versions = "*"
 
 [package.dependencies]
 flake8 = "*"
-
-[[package]]
-name = "flake8-tidy-imports"
-version = "4.5.0"
-description = "A flake8 plugin that helps you write tidier imports."
-category = "dev"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-flake8 = ">=3.8.0,<5"
 
 [[package]]
 name = "gitdb"
@@ -916,7 +894,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "~=3.9"
-content-hash = "d2d9f95b5ce6b24a3e719e234463cc1ad8c96eb587cc486b3a7d6f0ed9fe4a17"
+content-hash = "4934e4a8a9c18a0209f732a6756bf0be223a71acc7bb5f788a0a395d894f6e32"
 
 [metadata.files]
 alembic = [
@@ -1009,10 +987,6 @@ flake8-docstrings = [
     {file = "flake8-docstrings-1.6.0.tar.gz", hash = "sha256:9fe7c6a306064af8e62a055c2f61e9eb1da55f84bb39caef2b84ce53708ac34b"},
     {file = "flake8_docstrings-1.6.0-py2.py3-none-any.whl", hash = "sha256:99cac583d6c7e32dd28bbfbef120a7c0d1b6dde4adb5a9fd441c4227a6534bde"},
 ]
-flake8-import-order = [
-    {file = "flake8-import-order-0.18.1.tar.gz", hash = "sha256:a28dc39545ea4606c1ac3c24e9d05c849c6e5444a50fb7e9cdd430fc94de6e92"},
-    {file = "flake8_import_order-0.18.1-py2.py3-none-any.whl", hash = "sha256:90a80e46886259b9c396b578d75c749801a41ee969a235e163cfe1be7afd2543"},
-]
 flake8-polyfill = [
     {file = "flake8-polyfill-1.0.2.tar.gz", hash = "sha256:e44b087597f6da52ec6393a709e7108b2905317d0c0b744cdca6208e670d8eda"},
     {file = "flake8_polyfill-1.0.2-py2.py3-none-any.whl", hash = "sha256:12be6a34ee3ab795b19ca73505e7b55826d5f6ad7230d31b18e106400169b9e9"},
@@ -1020,10 +994,6 @@ flake8-polyfill = [
 flake8-string-format = [
     {file = "flake8-string-format-0.3.0.tar.gz", hash = "sha256:65f3da786a1461ef77fca3780b314edb2853c377f2e35069723348c8917deaa2"},
     {file = "flake8_string_format-0.3.0-py2.py3-none-any.whl", hash = "sha256:812ff431f10576a74c89be4e85b8e075a705be39bc40c4b4278b5b13e2afa9af"},
-]
-flake8-tidy-imports = [
-    {file = "flake8-tidy-imports-4.5.0.tar.gz", hash = "sha256:ac637961d0f319012d099e49619f8c928e3221f74e00fe6eb89513bc64c40adb"},
-    {file = "flake8_tidy_imports-4.5.0-py3-none-any.whl", hash = "sha256:87eed94ae6a2fda6a5918d109746feadf1311e0eb8274ab7a7920f6db00a41c9"},
 ]
 gitdb = [
     {file = "gitdb-4.0.9-py3-none-any.whl", hash = "sha256:8033ad4e853066ba6ca92050b9df2f89301b8fc8bf7e9324d412a63f8bf1a8fd"},
