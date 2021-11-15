@@ -24,7 +24,7 @@ jobs:
       PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit-cache
 
       AUTH_TOKEN: ci-token
-      DATABASE_URL: postgresql+asyncpg://pysite:pysite@postgres:5432/pysite
+      DATABASE_URL: postgresql+asyncpg://pysite:pysite@localhost:7777/pysite
 
     # Via https://github.com/actions/example-services/blob/main/.github/workflows/postgres-service.yml
     # services:
@@ -52,6 +52,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+          
+        # Start the database early to give it a chance to get ready before
+        # we start running tests.
+      - name: Run database using docker-compose
+        run: docker-compose run -d -p 7777:5432 --name pydis_api postgres
 
       # This step caches our Python dependencies. To make sure we
       # only restore a cache when the dependencies, the python version,
