@@ -3,8 +3,7 @@ from typing import Any, NoReturn, Union
 
 from sqlalchemy import ARRAY, BigInteger, Column, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import relationship
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import relationship, validates
 
 from api.core.database import Base
 

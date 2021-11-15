@@ -13,11 +13,10 @@ from api.core import settings
 from api.core.middleware import TokenAuthentication
 from api.core.middleware.token_authentication import (
     INVALID_CREDENTIALS,
-    NO_AUTHORIZATION_HEADER,
     NO_AUTH_DEBUG_ENDPOINTS,
+    NO_AUTHORIZATION_HEADER,
     on_auth_error,
 )
-
 
 pytestmark = pytest.mark.asyncio
 

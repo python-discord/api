@@ -1,13 +1,13 @@
 import asyncio
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.ext.asyncio.engine import AsyncConnection
 
 # This is a required step by Alembic to properly generate migrations
 import api.core.database.models  # noqa: F401
+from alembic import context
 from api.core.database import metadata
 from api.core.settings import settings
 
@@ -54,7 +54,7 @@ def do_run_migrations(connection: AsyncConnection):
         connection=connection,
         target_metadata=target_metadata,
         compare_type=True,
-        compare_server_default=True
+        compare_server_default=True,
     )
 
     with context.begin_transaction():

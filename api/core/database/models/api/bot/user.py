@@ -8,8 +8,8 @@ from sqlalchemy import (
     Column,
     SmallInteger,
     String,
+    create_engine,
 )
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, validates
 
 from api.core.database import Base
