@@ -2,17 +2,13 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
     hooks:
-      - name: Check TOML Syntax
-        id: check-toml
+      - id: check-toml
         alias: toml
-      - name: Check YAML Syntax
-        id: check-yaml
+      - id: check-yaml
         alias: yaml
-      - name: Fix EOFs
-        id: end-of-file-fixer
+      - id: end-of-file-fixer
         alias: eof
-      - name: Strip trailing whitespace
-        id: trailing-whitespace
+      - id: trailing-whitespace
         alias: whitespace
 
   - repo: https://github.com/pre-commit/pygrep-hooks
@@ -21,20 +17,22 @@ repos:
       - name: Prevent blanket NOQAs
         id: python-check-blanket-noqa
         alias: noqa
+      - name: Prevent blanket type ignores
+        id: python-check-blanket-type-ignore
+        alias: type-ignore
+
+  - repo: https://github.com/psf/black
+    rev: 21.10b0
+    hooks:
+      - id: black
+        language_version: python3
 
   - repo: local
     hooks:
-      - name: Black
-        id: black
-        description: Runs black within the project's environment
-        entry: poetry run black . --check --diff
+      - name: Flake8
+        id: flake8
+        description: Runs Flake8 within the project's environment
+        entry: poetry run flake8 api/ tests/ gunicorn.conf.py --diff
         language: system
         types: [python]
         require_serial: true
-      # - name: Flake8
-      #   id: flake8
-      #   description: Runs Flake8 within the project's environment
-      #   entry: poetry run flake8 api/ tests/ gunicorn.conf.py --diff
-      #   language: system
-      #   types: [python]
-      #   require_serial: true
