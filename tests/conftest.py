@@ -5,6 +5,7 @@ from urllib.parse import urlsplit, urlunsplit
 import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
 
 from api.core.database import Base
@@ -25,10 +26,13 @@ def event_loop(request) -> Generator:
 
 @pytest.fixture(scope="session")
 async def create_test_database_engine() -> Generator:
-    test_db_url = urlsplit(settings.database_url)._replace(path="/test")
-    engine = create_async_engine(urlunsplit(test_db_url), future=True)
-    yield engine
-    await engine.dispose()
+    async with test_engine.begin() as conn:
+        await conn.execute(text("CREATE DATABASE test;"))
+        test_db_url = urlsplit(settings.database_url)._replace(path="/test")
+        engine = create_async_engine(urlunsplit(test_db_url), future=True)
+        yield engine
+        await engine.dispose()
+        await conn.execute(text("DROP DATABASE test;"))
 
 
 @pytest.fixture()
