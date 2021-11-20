@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api.core.database.models.api.bot import Reminder, User
 from api.endpoints.reminder.reminder_schemas import ReminderResponse
 
-
 pytestmark = pytest.mark.asyncio
 
 
@@ -116,7 +115,7 @@ class TestReminderCreation:
             yield self
 
         @pytest.fixture(scope="function", autouse=True)
-        async def inject_config_reminder_deletion(self, async_db_session, yield_self: "TestReminderDeletion", client,
+        async def inject_config_reminder_deletion(self, async_db_session, yield_self, client,
                                                   app):
             yield_self.app = app
             yield_self.client = client
@@ -271,4 +270,6 @@ class TestReminderCreation:
             response = await self.client.patch(url, json=self.test_data)
             await async_db_session.commit()
             assert response.status_code == 200
-            assert (await async_db_session.execute(select(Reminder).filter_by(id=self.test_reminder.id))).scalars().first().content == self.test_data["content"]
+            assert (await async_db_session.execute(
+                select(Reminder).filter_by(id=self.test_reminder.id)
+            )).scalars().first().content == self.test_data["content"]

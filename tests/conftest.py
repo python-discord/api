@@ -1,15 +1,15 @@
 import asyncio
-from typing import Generator, Callable
+from typing import Callable, Generator
 from urllib.parse import urlsplit, urlunsplit
 
 import pytest
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
 from fastapi import FastAPI
 from httpx import AsyncClient
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
 
-from api.core.settings import settings
-from api.endpoints.dependencies.database import session_factory, engine, create_database_session
 from api.core.database import Base
+from api.core.settings import settings
+from api.endpoints.dependencies.database import create_database_session
 from api.main import app as main_app
 
 AUTH_HEADER = {"Authorization": f"Bearer {settings.auth_token}"}
@@ -53,13 +53,13 @@ def override_db_session(async_db_session: AsyncSession):
     async def _override_db_session():
         yield async_db_session
 
-    return _override_db_session
+    yield _override_db_session
 
 
 @pytest.fixture()
 def app(override_db_session: Callable):
     main_app.dependency_overrides[create_database_session] = override_db_session
-    return main_app
+    yield main_app
 
 
 @pytest.fixture()
