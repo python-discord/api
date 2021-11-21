@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "Python Discord API"
 version = "0.1.0"
-description = "A FastAPI-based service that allows our services to communicatie with our database."
+description = "A FastAPI-based service that allows our services to communicate with our database."
 authors = ["Python Discord <projects+api@pythondiscord.com>"]
 license = "MIT"
 
