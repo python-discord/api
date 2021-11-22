@@ -91,7 +91,7 @@ jobs:
         [flake8] %(code)s: %(text)s'"
 
       - name: Run pytest
-        run: pytest
+        run: pytest -n auto
         env:
           POSTGRES_HOST: localhost
           # Get the published port.

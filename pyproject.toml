@@ -14,6 +14,7 @@ asyncpg = "^0.24"
 alembic = "^1.6.5"
 uvicorn = {extras = ["standard"], version = "^0.14.0"}
 gunicorn = "^20.1.0"
+pytest-xdist = {extras = ["psutil"], version = "^2.4.0"}
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"

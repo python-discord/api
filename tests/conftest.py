@@ -25,14 +25,14 @@ def event_loop(request) -> Generator:
 
 
 @pytest.fixture(scope="session")
-async def create_test_database_engine() -> Generator:
+async def create_test_database_engine(worker_id) -> Generator:
     async with test_engine.begin() as conn:
-        await conn.execute(text("CREATE DATABASE test;"))
-        test_db_url = urlsplit(settings.database_url)._replace(path="/test")
+        await conn.execute(text(f"CREATE DATABASE {worker_id}_test;"))
+        test_db_url = urlsplit(settings.database_url)._replace(path=f"/{worker_id}_test")
         engine = create_async_engine(urlunsplit(test_db_url), future=True)
         yield engine
         await engine.dispose()
-        await conn.execute(text("DROP DATABASE test;"))
+        await conn.execute(text(f"DROP DATABASE {worker_id}_test;"))
 
 
 @pytest.fixture()
