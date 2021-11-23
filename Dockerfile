@@ -28,11 +28,12 @@ WORKDIR $INSTALL_DIR
 COPY "pyproject.toml" "poetry.lock" ./
 RUN poetry install --no-dev
 
-FROM base as development
-WORKDIR $APP_DIR
+FROM builder as development
 ENV FASTAPI_ENV=development
 COPY --from=builder $INSTALL_DIR $INSTALL_DIR
-
+WORKDIR $INSTALL_DIR
+RUN poetry install
+WORKDIR $APP_DIR
 COPY . .
 CMD ["sh", "-c", "alembic upgrade head && uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload"]
 

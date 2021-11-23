@@ -29,3 +29,17 @@ Another option is by using [Docker](https://www.docker.com/). After installing D
 With the project running in docker, open another terminal and run `poetry run task revision "Migration message here."`
 
 This will create a migration file in the path `alembic/versions`. Make sure to check it over, and fix any linting issues.
+### Running tests
+In order to run the tests, you need to have a PostgreSQL database up and running.
+The easiest (and currently supported) way to do this is using Docker and docker-compose:
+
+First you have to start the project:
+```
+docker-compose up
+```
+
+Then, when everything is set, you can just simply run:
+```
+poetry run task test
+```
+That will automatically run the tests inside a Docker container.

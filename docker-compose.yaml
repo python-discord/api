@@ -27,6 +27,9 @@ services:
     volumes:
       - .:/app:ro
       - ./alembic/versions:/app/alembic/versions
+      # Pytest-cache dependencies
+      - ./.pytest_cache:/app/.pytest_cache
+      - ./.hypothesis:/app/.hypothesis
     environment:
       database_url: postgresql+asyncpg://pydisapi:pydisapi@postgres:5432/pydisapi
       auth_token: "my_token"
