@@ -46,9 +46,10 @@ class ReminderCreateIn(BaseModel):
 class ReminderPatchIn(BaseModel):
     """A model representing a batch of data what has to be updated on a Reminder."""
 
+    active: Optional[bool] = Field(None)
     mentions: Optional[list[int]] = Field(None)
     content: Optional[str] = Field(None)
-    expiration: Optional[str] = Field(None)  # ISO-formatted datetime
+    expiration: Optional[datetime] = Field(None)  # ISO-formatted datetime
     failures: Optional[int] = Field(None)
 
 

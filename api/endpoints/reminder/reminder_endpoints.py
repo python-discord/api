@@ -133,6 +133,7 @@ async def edit_reminders(
     All fields in the request body are optional.
     #### Request body
     >>> {
+    ...     'active': bool,
     ...     'mentions': list[int],
     ...     'content': str,
     ...     'expiration': str,  # ISO-formatted datetime
