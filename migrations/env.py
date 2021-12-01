@@ -48,7 +48,7 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 
-def do_run_migrations(connection: AsyncConnection):
+def do_run_migrations(connection: AsyncConnection) -> None:
     """Run all migrations on the given connection."""
     context.configure(
         connection=connection,
@@ -61,7 +61,7 @@ def do_run_migrations(connection: AsyncConnection):
         context.run_migrations()
 
 
-async def run_migrations_online():
+async def run_migrations_online() -> None:
     """
     Run migrations in 'online' mode.
 

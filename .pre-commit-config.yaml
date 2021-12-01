@@ -38,7 +38,7 @@ repos:
       - name: Flake8
         id: flake8
         description: Runs Flake8 within the project's environment
-        entry: poetry run flake8 --config=tox.ini --diff
+        entry: poetry run flake8
         language: system
         types: [python]
         require_serial: true
