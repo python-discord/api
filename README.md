@@ -1,3 +1,23 @@
+# :warning: ARCHIVED :warning:
+
+Python Discord Core Developers have decided not to pursue further development of the API project.
+
+<details>
+  <summary>Read more</summary>
+  The Core Developer and Admin teams have decided to halt further work on rewrite of the Python Discord API from Django to FastAPI and sunset the python-discord/api repository.
+
+We initially set out on this project to have a simpler API which we hoped to gain more visibility into (monitoring/observability) and reduce the entry requirements for contribution to the project.
+
+We believe that we'd achieved these goals with the current site stack without requiring a rewrite to a different framework, citing some examples:
+- We have deployment previews of all static content on pythondiscord.com (e.g. resources, guides, events, etc.). Thanks Scaleios!
+- We've installed tooling that allows us to monitor the performance of Django with our existing Prometheus monitoring stack. Thanks Volcyy!
+- We've removed the need for subdomains for site, meaning that contribution no longer requires modifications to /etc/hosts or any complex host setup, localhost works! Thanks to me and Volcyy 😎!
+
+Django is a stack which our Core Developers and Contributors are already familiar with, it also has a considerably larger user group, more active maintenance and many more third party extensions. We've still got improvements to make to the current Python Discord site & API, for example improving performance on queries that look at vast amounts of data (e.g. metricity user data), but a migration to a different framework would not necessarily solve these problems.
+
+We'll be archiving the python-discord/api repository shortly, all open PRs have been closed already
+  </details>
+
 <h1 align="center">Python Discord API</h1>
 
 <p align="center">
